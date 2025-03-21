@@ -14,7 +14,7 @@ export function getBaseUrl() {
 
 export async function fetchProducts(endpoint = "api/products") {
   //! DONT USE THIS IN PRODUCTION
-  const url = `${getBaseUrl()}${endpoint}`;
+  const url = `https://webshop-2025-be-g4.vercel.app/${endpoint}`;
   const response = await fetch(url);
   if(response.ok){
     const data = await response.json();
