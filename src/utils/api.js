@@ -5,9 +5,9 @@ export function getBaseUrl() {
   const href = window.location.href;
   const match = regex.exec(href);
   console.log(match);
+  const group = match[1];
   if (match) {
-    const group = match[1];
-    return `https://webshop-2025-${group}-be.vercel.app/`;
+    return `https://webshop-2025-be-g4.vercel.app/`;
   }
   return "http://localhost:3000/";
 }
