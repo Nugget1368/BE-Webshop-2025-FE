@@ -5,8 +5,8 @@ export function getBaseUrl() {
   const href = window.location.href;
   const match = regex.exec(href);
   console.log(match);
-  const group = match[1];
   if (match) {
+    const group = match[1];
     return `https://webshop-2025-be-g4.vercel.app/`;
   }
   return "http://localhost:3000/";
@@ -14,7 +14,7 @@ export function getBaseUrl() {
 
 export async function fetchProducts(endpoint = "api/products") {
   //! DONT USE THIS IN PRODUCTION
-  const url = `https://webshop-2025-be-g4.vercel.app/${endpoint}`;
+  const url = `${getBaseUrl()}${endpoint}`;
   const response = await fetch(url);
   if(response.ok){
     const data = await response.json();
