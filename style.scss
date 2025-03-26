@@ -14,11 +14,12 @@ body {
 .site-header {
   background: #eaeaea;
   padding: 1rem;
-}
-.site-header nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .logo {
@@ -31,10 +32,11 @@ body {
   gap: 1rem;
   list-style: none;
   padding: 0;
-}
-.nav-links a {
-  text-decoration: none;
-  color: black;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 }
 
 /* Main Content */
@@ -55,12 +57,13 @@ body {
   border: 1px solid #ddd;
   padding: 1rem;
   text-align: center;
-}
-.product-card button {
-  background: lightgray;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
+
+  button {
+    background: lightgray;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
 }
 
 /* Login */
@@ -73,10 +76,11 @@ body {
 .form-group {
   display: flex;
   flex-direction: column;
-}
-.form-group input {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
+
+  input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+  }
 }
 
 /* Footer */
@@ -90,8 +94,9 @@ body {
   display: flex;
   gap: 1rem;
   justify-content: center;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 }
-.footer-links a {
-  text-decoration: none;
-  color: black;
-}/*# sourceMappingURL=style.css.map */
