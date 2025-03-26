@@ -41,3 +41,27 @@ function createProductCard(product) {
 
   return element;
 }
+
+let createProduct = document.querySelector("#createProduct");
+
+createProduct.addEventListener("submit", (event) => {
+  let nameValue = document.querySelector("form#createProduct input#name").value;
+  let priceValue = Number.parseFloat(document.querySelector("form#createProduct input#price").value);
+  let descrValue = document.querySelector("form#createProduct input#description").value;
+  let stockValue = Number.parseInt(document.querySelector("form#createProduct input#stock").value);
+  let imageValue = document.querySelector("form#createProduct input#imageUrl").value;
+
+  console.log(priceValue);
+
+  let product = {
+    "name": nameValue,
+    "price": priceValue,
+    "description": descrValue,
+    "stock": stockValue,
+    "image": imageValue,
+  }
+
+  addProduct("products", product);
+
+  event.preventDefault();
+})

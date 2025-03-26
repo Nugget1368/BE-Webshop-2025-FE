@@ -193,6 +193,22 @@
       "id": "c56f",
       "name": "Test Product",
       "price": 9.99
+    },
+    {
+      "id": "2c38",
+      "name": "En bil",
+      "price": 123,
+      "description": "Snabb",
+      "stock": "12",
+      "image": "nej"
+    },
+    {
+      "id": "b113",
+      "name": "Två bilar",
+      "price": 799,
+      "description": "Snabba",
+      "stock": 123,
+      "image": "ja"
     }
   ]
 }

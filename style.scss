@@ -1,3 +1,5 @@
+@import "./_mixins.scss";
+
 :root {
   font-family: Arial, sans-serif;
   color: #333;
@@ -67,15 +69,13 @@ body {
 }
 
 /* Login */
-.login-form {
-  display: flex;
-  flex-direction: column;
+form {
+  @include flex(column);
   gap: 1rem;
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
+  @include flex(column);
 
   input {
     padding: 0.5rem;
@@ -91,9 +91,8 @@ body {
 }
 
 .footer-links {
-  display: flex;
+  @include flex($justify-content: center);
   gap: 1rem;
-  justify-content: center;
 
   a {
     text-decoration: none;

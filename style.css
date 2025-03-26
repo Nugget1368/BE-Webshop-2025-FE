@@ -64,15 +64,19 @@ body {
 }
 
 /* Login */
-.login-form {
+form {
   display: flex;
-  flex-direction: column;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: stretch;
   gap: 1rem;
 }
 
 .form-group {
   display: flex;
-  flex-direction: column;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: stretch;
 }
 .form-group input {
   padding: 0.5rem;
@@ -88,8 +92,10 @@ body {
 
 .footer-links {
   display: flex;
-  gap: 1rem;
+  flex-flow: row wrap;
   justify-content: center;
+  align-items: stretch;
+  gap: 1rem;
 }
 .footer-links a {
   text-decoration: none;
