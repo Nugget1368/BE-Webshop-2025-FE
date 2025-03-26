@@ -1,4 +1,3 @@
-
 export function getBaseUrl() {
   // Get the group number from the hostname to determine the base URL for BE
   const regex = /webshop\-2025\-(g[0-9]{1,2})\-fe/g;
@@ -19,8 +18,18 @@ export async function fetchProducts(endpoint = "api/products") {
   // const url = `https://webshop-2025-be-g4.vercel.app/${endpoint}`;
   const response = await axios.get(url);
   console.log(response);
-  if(response.status === 200){
+  if (response.status === 200) {
     return response.data;
   }
-  return [];    
+  return [];
+}
+
+export async function addProduct(endpoint = "api/products", product) {
+  const url = `${getBaseUrl()}${endpoint}`;
+  const response = await axios.post(url, product);
+  console.log(response);
+  if (response.status === 201) {
+    return response.data;
+  }
+  return [];
 }

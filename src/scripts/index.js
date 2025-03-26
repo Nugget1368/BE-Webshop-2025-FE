@@ -1,4 +1,4 @@
-import { fetchProducts } from "../utils/api.js";
+import { fetchProducts, addProduct } from "../utils/api.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 
