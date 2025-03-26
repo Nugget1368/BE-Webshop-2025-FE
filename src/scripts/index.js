@@ -1,7 +1,6 @@
 import { fetchProducts, addProduct } from "../utils/api.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
-
 // Function to fetch and render products
 async function loadProducts() {
   const productsContainer = document.getElementById("products");
