@@ -9,16 +9,18 @@ export function getBaseUrl() {
     const group = match[1];
     return `https://webshop-2025-be-g4.vercel.app/`;
   }
-  return "http://localhost:3000/";
+  return "https://webshop-2025-be-g4.vercel.app/";
+  // return "http://localhost:3000/";
 }
 
 export async function fetchProducts(endpoint = "api/products") {
   //! DONT USE THIS IN PRODUCTION
   const url = `${getBaseUrl()}${endpoint}`;
-  const response = await fetch(url);
-  if(response.ok){
-    const data = await response.json();
-    return data;
+  // const url = `https://webshop-2025-be-g4.vercel.app/${endpoint}`;
+  const response = await axios.get(url);
+  console.log(response);
+  if(response.status === 200){
+    return response.data;
   }
   return [];    
 }
