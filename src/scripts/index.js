@@ -1,4 +1,5 @@
 import { fetchProducts, addProduct } from "../utils/api.js";
+import { Product } from "../classes/product.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 // Function to fetch and render products
@@ -51,17 +52,11 @@ createProduct.addEventListener("submit", (event) => {
   let stockValue = Number.parseInt(document.querySelector("form#createProduct input#stock").value);
   let imageValue = document.querySelector("form#createProduct input#imageUrl").value;
 
-  console.log(priceValue);
-
-  let product = {
-    "name": nameValue,
-    "price": priceValue,
-    "description": descrValue,
-    "stock": stockValue,
-    "image": imageValue,
-  }
+  
+  let product = new Product(nameValue, priceValue, descrValue, stockValue, imageValue);
+  console.log(product);
 
   addProduct("products", product);
 
   event.preventDefault();
-})
+});

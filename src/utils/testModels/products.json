@@ -209,6 +209,14 @@
       "description": "Snabba",
       "stock": 123,
       "image": "ja"
+    },
+    {
+      "id": "ef72",
+      "name": "Tre bilar",
+      "price": 999,
+      "description": "Medelsnabba",
+      "stock": 123,
+      "imageUrl": "Nja"
     }
   ]
 }
