@@ -1,4 +1,5 @@
 import { fetchProducts, addProduct } from "../utils/api.js";
+import { Product } from "../classes/product.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 // Function to fetch and render products
@@ -41,3 +42,21 @@ function createProductCard(product) {
 
   return element;
 }
+
+let createProduct = document.querySelector("#createProduct");
+
+createProduct.addEventListener("submit", (event) => {
+  let nameValue = document.querySelector("form#createProduct input#name").value;
+  let priceValue = Number.parseFloat(document.querySelector("form#createProduct input#price").value);
+  let descrValue = document.querySelector("form#createProduct input#description").value;
+  let stockValue = Number.parseInt(document.querySelector("form#createProduct input#stock").value);
+  let imageValue = document.querySelector("form#createProduct input#imageUrl").value;
+
+  
+  let product = new Product(nameValue, priceValue, descrValue, stockValue, imageValue);
+  console.log(product);
+
+  addProduct("products", product);
+
+  event.preventDefault();
+});

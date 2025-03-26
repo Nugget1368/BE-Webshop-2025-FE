@@ -1,3 +1,5 @@
+@import "./_mixins.scss";
+
 :root {
   font-family: Arial, sans-serif;
   color: #333;
@@ -14,11 +16,12 @@ body {
 .site-header {
   background: #eaeaea;
   padding: 1rem;
-}
-.site-header nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .logo {
@@ -31,10 +34,11 @@ body {
   gap: 1rem;
   list-style: none;
   padding: 0;
-}
-.nav-links a {
-  text-decoration: none;
-  color: black;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 }
 
 /* Main Content */
@@ -55,32 +59,28 @@ body {
   border: 1px solid #ddd;
   padding: 1rem;
   text-align: center;
-}
-.product-card button {
-  background: lightgray;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
+
+  button {
+    background: lightgray;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
 }
 
 /* Login */
 form {
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
-  align-items: stretch;
+  @include flex(column);
   gap: 1rem;
 }
 
 .form-group {
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
-  align-items: stretch;
-}
-.form-group input {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
+  @include flex(column);
+
+  input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+  }
 }
 
 /* Footer */
@@ -91,13 +91,11 @@ form {
 }
 
 .footer-links {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: stretch;
+  @include flex($justify-content: center);
   gap: 1rem;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 }
-.footer-links a {
-  text-decoration: none;
-  color: black;
-}/*# sourceMappingURL=style.css.map */
