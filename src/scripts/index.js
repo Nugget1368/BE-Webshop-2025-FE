@@ -4,6 +4,7 @@ import { Cart } from "../classes/cart.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 let cart = new Cart();
+let allProducts = [];
 // Function to fetch and render products
 async function loadProducts() {
   const productsContainer = document.getElementById("products");
@@ -11,6 +12,7 @@ async function loadProducts() {
 
   try {
     const products = await fetchProducts();
+    allProducts = products;
     productsContainer.innerHTML = ""; // Clear loading text
 
     if (products.length > 0) {
@@ -19,16 +21,7 @@ async function loadProducts() {
         //DELETE THIS
         productCard.id = product.id;
         productCard.querySelector(".add-to-cart-btn").id = product.id;
-        let btn = productCard.querySelector(`.add-to-cart-btn`);
-        btn.addEventListener("click", () => {
-            // alert(`Adding ${product.name + btn.id} to cart\nFunctionality not implemented yet`);
-            cart.addItem(product);
-            let items = cart.getItems();
-            let cartLink = document.querySelector("[data-cart]");
-            cartLink.textContent = `Cart (${items.length})`;
-            console.log(items);
-            console.log(`Total price: ${cart.getTotal()}`);
-          });
+        //DELETE THIS
         productsContainer.appendChild(productCard);
       });
     } else {
@@ -38,6 +31,13 @@ async function loadProducts() {
     console.error("Error fetching products:", error);
     productsContainer.innerHTML = "<p>Failed to load products.</p>";
   }
+  let addProductBtns = document.querySelectorAll(".add-to-cart-btn");
+  addProductBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let product = allProducts.find((p) => p.id == btn.id);
+      addToCart(product);
+    });
+  });
 }
 
 // Function to create an individual product card
@@ -58,6 +58,11 @@ function createProductCard(product) {
   return element;
 }
 
+const addToCart = (product)=>{
+  cart.addItem(product);
+  cart.updateCart();
+}
+
 let createProduct = document.querySelector("#createProduct");
 
 createProduct.addEventListener("submit", (event) => {
@@ -67,7 +72,7 @@ createProduct.addEventListener("submit", (event) => {
   let stockValue = Number.parseInt(document.querySelector("form#createProduct input#stock").value);
   let imageValue = document.querySelector("form#createProduct input#imageUrl").value;
 
-  
+
   let product = new Product(nameValue, priceValue, descrValue, stockValue, imageValue);
   console.log(product);
 
