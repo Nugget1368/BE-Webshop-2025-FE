@@ -1,9 +1,18 @@
 import { fetchProducts, addProduct } from "../utils/api.js";
 import { Product } from "../classes/product.js";
 import { Cart } from "../classes/cart.js";
+import { LocalStorage, CART_KEY } from "../utils/localstorage.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
-let cart = new Cart();
+let cart = {};
+if(LocalStorage.getStorageAsJSON(CART_KEY)){
+  let items = LocalStorage.getStorageAsJSON(CART_KEY);
+  cart = new Cart(items);
+}
+else{
+  cart = new Cart();
+}
+cart.updateCart();
 let allProducts = [];
 // Function to fetch and render products
 async function loadProducts() {
@@ -61,6 +70,7 @@ function createProductCard(product) {
 const addToCart = (product)=>{
   cart.addItem(product);
   cart.updateCart();
+  LocalStorage.saveToStorage(CART_KEY, product);
 }
 
 let createProduct = document.querySelector("#createProduct");
