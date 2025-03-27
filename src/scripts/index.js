@@ -13,14 +13,12 @@ async function loadProducts() {
     productsContainer.innerHTML = ""; // Clear loading text
 
     if (products.length > 0) {
-      // let builder = new Builder();
-      // builder.buildProductInfo(products[0]);
-      // let arr = builder.build();
-      arr.forEach((product) => productsContainer.append(product));
-      products.forEach((product) => {
-        const productCard = createProductCard(product);
-        productsContainer.appendChild(productCard);
-      });
+      let productBuilder = new Builder();
+      for(let x = 0; x < products.length; x++){
+        productBuilder.buildProductCard(products[x]);
+        let productCards = productBuilder.build();
+        productsContainer.append(productCards[x]);
+      }
     } else {
       productsContainer.innerHTML = "<p>No products available.</p>";
     }
@@ -28,24 +26,6 @@ async function loadProducts() {
     console.error("Error fetching products:", error);
     productsContainer.innerHTML = "<p>Failed to load products.</p>";
   }
-}
-
-// Function to create an individual product card
-function createProductCard(product) {
-  const element = document.createElement("div");
-  element.className = "product-card";
-
-  element.innerHTML = `
-    <h3>${product.name}</h3>
-    <p>$${product.price.toFixed(2)}</p>
-    <button class="add-to-cart-btn">Add to Cart</button>
-  `;
-
-  element.querySelector(".add-to-cart-btn").addEventListener("click", () => {
-    alert(`Adding ${product.name} to cart\nFunctionality not implemented yet`);
-  });
-
-  return element;
 }
 
 let createProduct = document.querySelector("#createProduct");

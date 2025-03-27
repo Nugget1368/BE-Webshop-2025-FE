@@ -7,7 +7,7 @@ export class Builder {
         return this.resultArr;
     }
 
-    buildProductInfo(product) {
+    buildProductCardInfo(product) {
         let image = document.createElement("img");
         image.src = product.imageUrl;
         let name = document.createElement("h3");
@@ -20,8 +20,30 @@ export class Builder {
         info.classList.add("product-card");
         info.id = product.id ? product.id : "missing-id";
         let button = this.buildAddToCartBtn(info.id);
+        button.addEventListener("click", () => {
+            alert(`Adding ${product.name} to cart\nFunctionality not implemented yet`);
+          });
+
         info.append(name, price, description, image, button);
         this.resultArr.push(info);
+    }
+
+    buildProductCard(product) {
+      const element = document.createElement("article");
+      element.className = "product-card";
+      element.id = product.id ? product.id : "missing-id";
+      element.innerHTML = `
+        <h3>${product.name}</h3>
+        <p>$${product.price.toFixed(2)}</p>
+      `;
+      let button = this.buildAddToCartBtn(element.id);
+      element.append(button);
+    
+      button.addEventListener("click", () => {
+        alert(`Adding ${product.name} to cart\nFunctionality not implemented yet`);
+      });
+    
+      this.resultArr.push(element);
     }
 
     buildAddToCartBtn(id = "") {
