@@ -26,7 +26,13 @@
     <!-- MAIN CONTENT -->
     <main class="main-content">
       <h1>Welcome to Hakim Livs</h1>
-      <form id="createProduct">
+
+      <button id="manageProductsBtn">Skapa en produkt</button>
+      <dialog id="modal">
+        <button id="closeModal">X</button>
+        <div id="modalContent"></div>
+      </dialog>
+      <!-- <form id="createProduct">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required />
         <label for="price">Price:</label>
@@ -38,7 +44,7 @@
         <label for="imageUrl">Image:</label>
         <input type="text" id="imageUrl" name="imageUrl" required />
         <button id="createProductBtn" type="submit">Lägg till produkt</button>
-      </form>
+      </form> -->
       <div id="products"></div>
     </main>
 
