@@ -1,6 +1,7 @@
 import { fetchProducts, addProduct, deleteProduct } from "../utils/api.js";
 import { Product } from "../classes/product.js";
 import { ProductFormBuilder } from "../builders/builders.js";
+import { Builder } from "../builders/builder.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 // Function to fetch and render products
@@ -13,10 +14,12 @@ async function loadProducts() {
     productsContainer.innerHTML = ""; // Clear loading text
 
     if (products.length > 0) {
-      products.forEach((product) => {
-        const productCard = createProductCard(product);
-        productsContainer.appendChild(productCard);
-      });
+      let productBuilder = new Builder();
+      for (let x = 0; x < products.length; x++) {
+        productBuilder.buildProductCard(products[x]);
+        let productCards = productBuilder.build();
+        productsContainer.append(productCards[x]);
+      }
     } else {
       productsContainer.innerHTML = "<p>No products available.</p>";
     }
@@ -26,6 +29,7 @@ async function loadProducts() {
   }
 }
 
+//CHANGE THIS!!!
 // Function to create an individual product card
 function createProductCard(product) {
   const element = document.createElement("div");
@@ -50,6 +54,7 @@ function createProductCard(product) {
 }
 
 //Skapa knapp för modal
+let createProduct = document.querySelector("#createProduct");
 
 const manageProductsBtn = document.querySelector("#manageProductsBtn");
 const modal = document.querySelector("#modal");

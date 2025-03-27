@@ -1,3 +1,37 @@
 {
-  "products": []
+  "products": [
+    {
+      "id": "1",
+      "name": "Product 1",
+      "price": 19.99,
+      "description": "description for p1",
+      "stock": 10,
+      "category": "category 1",
+      "imageUrl": ""
+    },
+    {
+      "id": "2c38",
+      "name": "En bil",
+      "price": 123,
+      "description": "Snabb",
+      "stock": "12",
+      "image": "nej"
+    },
+    {
+      "id": "b113",
+      "name": "Två bilar",
+      "price": 799,
+      "description": "Snabba",
+      "stock": 123,
+      "image": "ja"
+    },
+    {
+      "id": "ef72",
+      "name": "Tre bilar",
+      "price": 999,
+      "description": "Medelsnabba",
+      "stock": 123,
+      "imageUrl": "Nja"
+    }
+  ]
 }
