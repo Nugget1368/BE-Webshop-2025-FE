@@ -2,9 +2,50 @@
 
 Applikation som hanterar ett externt api och simulerar en online matvarubutik.
 
+
+
 ## :star: Classes
 Här finner vi alla klasser som används genom projektet:
 + **product.js**, innehåller modelen som används för en produkt.
+
+****
+
+## :star: Builders
+Här finner vi alla [Builder-klasser](https://refactoring.guru/design-patterns/builder). En Builder är ett design-pattern, en mall eller ett mönster som vi kan följa när vi vill rendera data i DOM:en.
+
+### Builder-klassen
+I builder klassen har vi en konstruktor med en **resultat Array** som property. När vi bygger saker i klassen vill vi returnera element i **Resultat-arrayen**. Man kan säga att man fyller på resultat-arrayen och när man är nöjd returnerar man resultatet med hjälp av **build()-Metoden**
+```js
+export class Builder {
+    constructor() {
+        this.resultArr = [];
+    }
+
+    build() {
+        return this.resultArr;
+    }
+}
+```
+**Exempel**:
+I exemplet nedan har vi 3 produkter, product1, product2, product3. Vi vill bygga kort för dessa 3 produkter i DOM:en. Då använder vi oss av buildProductCard-buildermetoden i Klassen Builder. För vardera gång vi påkallar metoden så kommer **Resultat-Arrayen** fyllas på med 1 nytt produktkort. Efter 3 metod-anrop har vi alltså en array med 3 värden i sig.
+```js
+//Skapa ett builder-objekt
+let builder = new Builder();
+//Bygg de saker vi vill ha - 3 st. produktkort
+builder.buildProductCard(product1);
+builder.buildProductCard(product2);
+builder.buildProductCard(product3);
+//Returnera resultatet - Array(3)
+let result = builder.Build();
+//Skriv ut i DOM:en
+result.foreach(element =>{
+    document.body.append(element);
+})
+```
+#### Metod-Anrop
++ **build** - Returnerar resultatet
++ **buildProductCard** - Bygger ett enkelt produkt-kort
++ **buildProductCardInfo** - Bygger ett detaljerat produkt-kort med infomration om produkten.
 
 
 ****
