@@ -2,13 +2,10 @@
 
 Applikation som hanterar ett externt api och simulerar en online matvarubutik.
 
-
-
 ## :star: Classes
 Här finner vi alla klasser som används genom projektet:
 + **product.js**, innehåller modelen som används för en produkt.
 
-****
 
 ## :star: Builders
 Här finner vi alla [Builder-klasser](https://refactoring.guru/design-patterns/builder). En Builder är ett design-pattern, en mall eller ett mönster som vi kan följa när vi vill rendera data i DOM:en.
@@ -47,7 +44,6 @@ result.foreach(element =>{
 + **buildProductCard** - Bygger ett enkelt produkt-kort
 + **buildProductCardInfo** - Bygger ett detaljerat produkt-kort med infomration om produkten.
 + **buildAddToCartBtn** - Bygger en _Add To Cart Knapp_ som kan återanvändas för ett enhetligt mönster i applikationen.
-
 
 ****
 
