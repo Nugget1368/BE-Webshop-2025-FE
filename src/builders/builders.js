@@ -107,8 +107,11 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", function (event) {
     if (event.target && event.target.classList.contains("delete-product-btn")) {
       const productCard = event.target.closest(".product-card");
+      console.log(productCard);
       const productName = productCard.querySelector("h3").textContent;
-      const productId = productCard.dataset.productId;
+      console.log(productName);
+      const productId = productCard.id;
+      console.log(productId);
 
       const modalContent = document.querySelector("#modalContent");
       const modal = document.querySelector("#modal");
@@ -136,7 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       document.getElementById("confirmDeleteBtn").addEventListener("click", () => {
-        // Använd product.id för att radera
         deleteProduct("products", productId)
           .then(() => {
             console.log("Produkt borttagen!");

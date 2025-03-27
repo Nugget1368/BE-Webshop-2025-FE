@@ -7,11 +7,11 @@ document.addEventListener("DOMContentLoaded", loadProducts);
 // Function to fetch and render products
 async function loadProducts() {
   const productsContainer = document.getElementById("products");
-  productsContainer.innerHTML = "<p>Loading products...</p>"; // Temporary message while loading
+  productsContainer.innerHTML = "<p>Loading products...</p>";
 
   try {
     const products = await fetchProducts();
-    productsContainer.innerHTML = ""; // Clear loading text
+    productsContainer.innerHTML = "";
 
     if (products.length > 0) {
       let productBuilder = new Builder();
@@ -28,32 +28,6 @@ async function loadProducts() {
     productsContainer.innerHTML = "<p>Failed to load products.</p>";
   }
 }
-
-//CHANGE THIS!!!
-// Function to create an individual product card
-function createProductCard(product) {
-  const element = document.createElement("div");
-  element.className = "product-card";
-  element.dataset.productId = product.id;
-
-  element.innerHTML = `
-    <h3>${product.name}</h3>
-    <p>$${product.price.toFixed(2)}</p>
-    <div class="product-buttons">
-    <button class="add-to-cart-btn">Add to Cart</button>
-    <button class="edit-product-btn">Edit</button>
-    <button class="delete-product-btn">Delete</button>
-    </div>
-  `;
-
-  element.querySelector(".add-to-cart-btn").addEventListener("click", () => {
-    alert(`Adding ${product.name} to cart\nFunctionality not implemented yet`);
-  });
-
-  return element;
-}
-
-//Skapa knapp för modal
 let createProduct = document.querySelector("#createProduct");
 
 const manageProductsBtn = document.querySelector("#manageProductsBtn");
