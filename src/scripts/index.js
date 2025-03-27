@@ -1,5 +1,6 @@
 import { fetchProducts, addProduct } from "../utils/api.js";
 import { Product } from "../classes/product.js";
+import { Builder } from "../builders/builder.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 // Function to fetch and render products
@@ -12,6 +13,10 @@ async function loadProducts() {
     productsContainer.innerHTML = ""; // Clear loading text
 
     if (products.length > 0) {
+      // let builder = new Builder();
+      // builder.buildProductInfo(products[0]);
+      // let arr = builder.build();
+      arr.forEach((product) => productsContainer.append(product));
       products.forEach((product) => {
         const productCard = createProductCard(product);
         productsContainer.appendChild(productCard);
