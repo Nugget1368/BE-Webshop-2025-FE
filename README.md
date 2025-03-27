@@ -46,6 +46,7 @@ result.foreach(element =>{
 + **build** - Returnerar resultatet
 + **buildProductCard** - Bygger ett enkelt produkt-kort
 + **buildProductCardInfo** - Bygger ett detaljerat produkt-kort med infomration om produkten.
++ **buildAddToCartBtn** - Bygger en _Add To Cart Knapp_ som kan återanvändas för ett enhetligt mönster i applikationen.
 
 
 ****
