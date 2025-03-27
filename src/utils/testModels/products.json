@@ -1,37 +1,36 @@
 {
   "products": [
     {
-      "id": "1",
-      "name": "Product 1",
-      "price": 19.99,
-      "description": "description for p1",
-      "stock": 10,
-      "category": "category 1",
-      "imageUrl": ""
-    },
-    {
-      "id": "2c38",
-      "name": "En bil",
-      "price": 123,
-      "description": "Snabb",
-      "stock": "12",
-      "image": "nej"
-    },
-    {
-      "id": "b113",
-      "name": "Två bilar",
-      "price": 799,
-      "description": "Snabba",
-      "stock": 123,
-      "image": "ja"
-    },
-    {
       "id": "ef72",
       "name": "Tre bilar",
       "price": 999,
       "description": "Medelsnabba",
       "stock": 123,
       "imageUrl": "Nja"
+    },
+    {
+      "id": "4b0a",
+      "name": "Banan",
+      "price": 20,
+      "description": "Rosa banan",
+      "stock": 2,
+      "imageUrl": "saknas"
+    },
+    {
+      "id": "7f04",
+      "name": "a",
+      "price": 2,
+      "description": "w",
+      "stock": 222222,
+      "imageUrl": "saknas"
+    },
+    {
+      "id": "eb9b",
+      "name": "Båt",
+      "price": 12,
+      "description": "Fin båt",
+      "stock": 3,
+      "imageUrl": "saknas"
     }
   ]
 }
