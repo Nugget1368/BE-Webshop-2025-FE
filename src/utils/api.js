@@ -29,3 +29,13 @@ export async function addProduct(endpoint = "products", product) {
   }
   return [];
 }
+
+export async function deleteProduct(endpoint = "products", productId) {
+  const url = `${getBaseUrl()}${endpoint}/${productId}`;
+  const response = await axios.delete(url);
+  console.log(response);
+  if (response.status === 200) {
+    return response.data;
+  }
+  return [];
+}

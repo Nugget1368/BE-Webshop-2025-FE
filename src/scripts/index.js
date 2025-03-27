@@ -1,5 +1,6 @@
-import { fetchProducts, addProduct } from "../utils/api.js";
+import { fetchProducts, addProduct, deleteProduct } from "../utils/api.js";
 import { Product } from "../classes/product.js";
+import { ProductFormBuilder } from "../builders/builders.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 // Function to fetch and render products
@@ -29,11 +30,16 @@ async function loadProducts() {
 function createProductCard(product) {
   const element = document.createElement("div");
   element.className = "product-card";
+  element.dataset.productId = product.id;
 
   element.innerHTML = `
     <h3>${product.name}</h3>
     <p>$${product.price.toFixed(2)}</p>
+    <div class="product-buttons">
     <button class="add-to-cart-btn">Add to Cart</button>
+    <button class="edit-product-btn">Edit</button>
+    <button class="delete-product-btn">Delete</button>
+    </div>
   `;
 
   element.querySelector(".add-to-cart-btn").addEventListener("click", () => {
@@ -43,20 +49,15 @@ function createProductCard(product) {
   return element;
 }
 
-let createProduct = document.querySelector("#createProduct");
+//Skapa knapp för modal
 
-createProduct.addEventListener("submit", (event) => {
-  let nameValue = document.querySelector("form#createProduct input#name").value;
-  let priceValue = Number.parseFloat(document.querySelector("form#createProduct input#price").value);
-  let descrValue = document.querySelector("form#createProduct input#description").value;
-  let stockValue = Number.parseInt(document.querySelector("form#createProduct input#stock").value);
-  let imageValue = document.querySelector("form#createProduct input#imageUrl").value;
+const manageProductsBtn = document.querySelector("#manageProductsBtn");
+const modal = document.querySelector("#modal");
 
-  
-  let product = new Product(nameValue, priceValue, descrValue, stockValue, imageValue);
-  console.log(product);
+manageProductsBtn.addEventListener("click", () => {
+  modal.showModal();
+});
 
-  addProduct("products", product);
-
-  event.preventDefault();
+document.querySelector("#closeModal").addEventListener("click", () => {
+  modal.close();
 });
