@@ -6,6 +6,8 @@ import { ProductFormBuilder } from "../builders/ProductFormBuilder.js";
 import { Builder } from "../builders/builder.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
+const modal = document.querySelector("#modal");
+
 let cart = {};
 if (LocalStorage.getStorageAsJSON(CART_KEY)) {
   let items = LocalStorage.getStorageAsJSON(CART_KEY);
@@ -44,10 +46,19 @@ async function loadProducts() {
   addProductBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       let product = allProducts.find((p) => p._id == btn.id.substring(btn.id.lastIndexOf("-") + 1));
-      console.log(product);
       addToCart(product);
     });
   });
+  let products = document.querySelectorAll(".product-card");
+  products.forEach((product) => {
+    product.addEventListener("click", () => {
+      let builder = new Builder();
+      builder.buildProductCardInfo(allProducts.find((p) => p._id == product.id));
+      let productInfo = builder.build();
+      document.querySelector("#modalContent").append(productInfo[0]);
+      modal.showModal();
+    })
+  })
 }
 
 const addToCart = (product) => {
@@ -57,11 +68,14 @@ const addToCart = (product) => {
 }
 
 const manageProductsBtn = document.querySelector("#manageProductsBtn");
-const modal = document.querySelector("#modal");
 manageProductsBtn.addEventListener("click", () => {
   modal.showModal();
 });
 
 document.querySelector("#closeModal").addEventListener("click", () => {
   modal.close();
+});
+
+modal.addEventListener("close", () => {
+  document.querySelector("#modalContent").innerHTML = "";
 });

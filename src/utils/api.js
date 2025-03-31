@@ -6,8 +6,8 @@ export function getBaseUrl() {
   if (match) {
     return `https://webshop-2025-be-g4.vercel.app/api/`;
   }
-  return "https://webshop-2025-be-g4.vercel.app/api/";
-  // return "http://localhost:5001/";
+  // return "https://webshop-2025-be-g4.vercel.app/api/";
+  return "http://localhost:5001/";
 }
 
 export async function fetchProducts(endpoint = "products") {

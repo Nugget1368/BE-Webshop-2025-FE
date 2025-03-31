@@ -9,6 +9,7 @@ export class Builder {
 
   buildProductCardInfo(product) {
     let image = document.createElement("img");
+    console.log(product.imageUrl);
     image.src = product.imageUrl;
     let name = document.createElement("h3");
     name.textContent = product.name;
@@ -19,11 +20,8 @@ export class Builder {
     let info = document.createElement("article");
     info.classList.add("product-card");
     info.id = product._id ? product._id : "missing-id";
-    let button = this.buildAddToCartBtn(info.id);
-    info.append(name, price, description, image);
-    button.forEach((btn) => {
-      info.append(btn);
-    });
+    let button = this.buildBtn("Buy", "build-product-btn", info.id);
+    info.append(image, name, price, description, button);
     this.resultArr.push(info);
   }
 
