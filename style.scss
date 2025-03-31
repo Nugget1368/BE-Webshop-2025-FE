@@ -100,68 +100,78 @@ form {
   }
 }
 
-// dialog {
-//   width: 70%;
-//   height: 60%;
-//   padding: 1em;
-//   border: none;
-//   border-radius: 8px;
-// }
 
-// #closeModal {
-//   position: absolute;
-//   top: 10px;
-//   right: 10px;
-//   background: none;
-//   border: none;
-//   font-size: 1.5em;
-//   cursor: pointer;
-// }
-
-/* Modal Dialog Styling */
-dialog#modal {
-  width: auto;
-  min-width: 350px;
-  max-width: 70%;
-  height: auto;
-  max-height: 80vh;
-  margin: auto;
+dialog{
   padding: 2rem;
   background-color: white;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   border: none;
   border-radius: 8px;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  button:first-child {
+    position: absolute;
+    top: 0.8rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #777;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.2rem;
+    font-weight: bold;
+    transition: color 0.2s ease;
+  }
+  
+  #closeModal:hover {
+    color: #333;
+  }
+  
+  #modalContent {
+    padding-top: 0.5rem;
+  }
+}
+/* Modal Dialog Styling */
+dialog#modal {
+  width: auto;
+  min-width: 350px;
+  max-width: 70%;
+  max-height: 80vh;
+  height: auto;
+  margin: auto;
   position: relative;
   overflow-y: auto;
 }
 
-dialog#modal::backdrop {
+dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(2px);
 }
 
-#closeModal {
-  position: absolute;
-  top: 0.8rem;
-  right: 1rem;
-  font-size: 1.5rem;
-  line-height: 1;
-  color: #777;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.2rem;
-  font-weight: bold;
-  transition: color 0.2s ease;
+dialog[data-sidebar] {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0;
+  width: 300px;
+  height: 100vh;
+  min-width: 0px;
+  max-width: 100%;
+  max-height: 100%;
+  animation: slideIn 0.3s ease;
+  @media (max-width: 600px) {
+    width: 100%;
+    border-radius: 0;
+  }
 }
 
-#closeModal:hover {
-  color: #333;
-}
-
-#modalContent {
-  padding-top: 0.5rem;
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 #createProduct {
