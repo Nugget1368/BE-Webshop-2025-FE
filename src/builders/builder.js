@@ -52,4 +52,20 @@ export class Builder {
     id === "" ? "" : button.id = id;
     return button;
   }
+
+  buildCartInfo(cart) {
+    let h4 = document.createElement("h4");
+    h4.textContent = "In Cart";
+    let ul = document.createElement("ul");
+    cart.items.forEach((item) => {
+      let li = document.createElement("li");
+      li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+      ul.append(li);
+    });
+    let total = document.createElement("h5");
+    total.textContent = `Total: $${cart.getTotal().toFixed(2)}`;
+    let div = document.createElement("div");
+    div.append(h4, ul, total);
+    this.resultArr.push(div);
+  }
 }
