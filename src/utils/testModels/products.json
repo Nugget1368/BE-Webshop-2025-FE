@@ -1,14 +1,6 @@
 {
   "products": [
     {
-      "id": "ef72",
-      "name": "Tre bilar",
-      "price": 999,
-      "description": "Medelsnabba",
-      "stock": 123,
-      "imageUrl": "Nja"
-    },
-    {
       "id": "4b0a",
       "name": "Banan",
       "price": 20,
@@ -39,6 +31,14 @@
       "description": "Mot huvudverk och ångest",
       "stock": 22,
       "imageUrl": "saknas"
+    },
+    {
+      "id": "2b42",
+      "name": "Smäll karamell",
+      "price": 10.99,
+      "description": "Karameller som smäller",
+      "stock": 20,
+      "imageUrl": "sa"
     }
   ]
 }
