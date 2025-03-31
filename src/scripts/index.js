@@ -1,9 +1,21 @@
 import { fetchProducts, addProduct, deleteProduct } from "../utils/api.js";
 import { Product } from "../classes/product.js";
+import { Cart } from "../classes/cart.js";
+import { LocalStorage, CART_KEY } from "../utils/localstorage.js";
 import { ProductFormBuilder } from "../builders/builders.js";
 import { Builder } from "../builders/builder.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
+let cart = {};
+if (LocalStorage.getStorageAsJSON(CART_KEY)) {
+  let items = LocalStorage.getStorageAsJSON(CART_KEY);
+  cart = new Cart(items);
+}
+else {
+  cart = new Cart();
+}
+cart.updateCart();
+let allProducts = [];
 // Function to fetch and render products
 async function loadProducts() {
   const productsContainer = document.getElementById("products");
@@ -11,6 +23,7 @@ async function loadProducts() {
 
   try {
     const products = await fetchProducts();
+    allProducts = products;
     productsContainer.innerHTML = "";
 
     if (products.length > 0) {
@@ -27,12 +40,23 @@ async function loadProducts() {
     console.error("Error fetching products:", error);
     productsContainer.innerHTML = "<p>Failed to load products.</p>";
   }
+  let addProductBtns = document.querySelectorAll(".add-to-cart-btn");
+  addProductBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let product = allProducts.find((p) => p.id == btn.id.substring(btn.id.lastIndexOf("-") + 1));
+      addToCart(product);
+    });
+  });
 }
-let createProduct = document.querySelector("#createProduct");
+
+const addToCart = (product) => {
+  cart.addItem(product);
+  cart.updateCart();
+  LocalStorage.saveToStorage(CART_KEY, product);
+}
 
 const manageProductsBtn = document.querySelector("#manageProductsBtn");
 const modal = document.querySelector("#modal");
-
 manageProductsBtn.addEventListener("click", () => {
   modal.showModal();
 });

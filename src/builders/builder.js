@@ -52,7 +52,7 @@ export class Builder {
     deleteButton.classList.add("delete-product-btn");
     deleteButton.textContent = "Delete";
     button.textContent = "Add to cart";
-    button.classList.add("primary-btn");
+    button.classList.add("add-to-cart-btn");
     button.id = `add-to-cart-${id}` || `add-to-cart-id`;
     let array = [button, editButton, deleteButton];
     return array;
