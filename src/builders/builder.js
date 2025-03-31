@@ -18,7 +18,7 @@ export class Builder {
     description.textContent = product.description;
     let info = document.createElement("article");
     info.classList.add("product-card");
-    info.id = product.id ? product.id : "missing-id";
+    info.id = product._id ? product._id : "missing-id";
     let button = this.buildAddToCartBtn(info.id);
     info.append(name, price, description, image);
     button.forEach((btn) => {
@@ -30,7 +30,7 @@ export class Builder {
   buildProductCard(product) {
     const element = document.createElement("article");
     element.className = "product-card";
-    element.id = product.id ? product.id : "missing-id";
+    element.id = product._id ? product._id : "missing-id";
     element.innerHTML = `
         <h3>${product.name}</h3>
         <p>$${product.price.toFixed(2)}</p>
