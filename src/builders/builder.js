@@ -9,7 +9,6 @@ export class Builder {
 
   buildProductCardInfo(product) {
     let image = document.createElement("img");
-    console.log(product.imageUrl);
     image.src = product.imageUrl;
     let name = document.createElement("h3");
     name.textContent = product.name;

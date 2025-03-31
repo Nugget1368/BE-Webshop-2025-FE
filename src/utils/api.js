@@ -23,7 +23,6 @@ export async function fetchProducts(endpoint = "products") {
 export async function addProduct(endpoint = "products", product) {
   const url = `${getBaseUrl()}${endpoint}`;
   const response = await axios.post(url, product);
-  console.log(response);
   if (response.status === 201) {
     return response.data;
   }
@@ -33,7 +32,6 @@ export async function addProduct(endpoint = "products", product) {
 export async function deleteProduct(endpoint = "products", productId) {
   const url = `${getBaseUrl()}${endpoint}/${productId}`;
   const response = await axios.delete(url);
-  console.log(response);
   if (response.status === 200) {
     return response.data;
   }
