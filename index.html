@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hakim Livs</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- PAGE-SPECIFIC JAVASCRIPT -->
+    <script type="module" src="./src/scripts/index.js"></script>
   </head>
-  <body>
 
+  <body>
     <!-- HEADER -->
     <header class="site-header">
       <nav>
         <a href="index.html" class="logo">Hakim Livs</a>
         <ul class="nav-links">
           <li><a href="products.html">Products</a></li>
-          <li><a href="cart.html">Cart (0)</a></li>
+          <li><a data-cart href="cart.html">Cart (0)</a></li>
           <li><a href="login.html">Login</a></li>
         </ul>
       </nav>
@@ -23,7 +26,13 @@
     <!-- MAIN CONTENT -->
     <main class="main-content">
       <h1>Welcome to Hakim Livs</h1>
-        <div id="products"></div>
+
+      <button id="manageProductsBtn">Skapa en produkt</button>
+      <dialog id="modal">
+        <button id="closeModal">X</button>
+        <div id="modalContent"></div>
+      </dialog>
+      <div id="products"></div>
     </main>
 
     <!-- FOOTER -->
@@ -37,8 +46,5 @@
         </div>
       </div>
     </footer>
-
-    <!-- PAGE-SPECIFIC JAVASCRIPT -->
-    <script type="module" src="./src/scripts/index.js"></script>
   </body>
 </html>

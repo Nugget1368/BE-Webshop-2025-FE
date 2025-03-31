@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "id": "4b0a",
+      "name": "Banan",
+      "price": 20,
+      "description": "Rosa banan",
+      "stock": 2,
+      "imageUrl": "saknas"
+    },
+    {
+      "id": "eb9b",
+      "name": "Båt",
+      "price": 12,
+      "description": "Fin båt",
+      "stock": 3,
+      "imageUrl": "saknas"
+    },
+    {
+      "id": "fbe6",
+      "name": "Juice",
+      "price": 1.99,
+      "description": "Vanlig juice",
+      "stock": 10,
+      "imageUrl": "saknas"
+    },
+    {
+      "id": "945d",
+      "name": "Alvedon",
+      "price": 20.89,
+      "description": "Mot huvudverk och ångest",
+      "stock": 22,
+      "imageUrl": "saknas"
+    },
+    {
+      "id": "2b42",
+      "name": "Smäll karamell",
+      "price": 10.99,
+      "description": "Karameller som smäller",
+      "stock": 20,
+      "imageUrl": "sa"
+    }
+  ]
+}

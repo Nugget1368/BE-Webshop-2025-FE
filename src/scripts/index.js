@@ -1,21 +1,38 @@
-import { fetchProducts } from "../utils/api.js";
+import { fetchProducts, addProduct, deleteProduct } from "../utils/api.js";
+import { Product } from "../classes/product.js";
+import { Cart } from "../classes/cart.js";
+import { LocalStorage, CART_KEY } from "../utils/localstorage.js";
+import { ProductFormBuilder } from "../builders/ProductFormBuilder.js";
+import { Builder } from "../builders/builder.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
-
+let cart = {};
+if (LocalStorage.getStorageAsJSON(CART_KEY)) {
+  let items = LocalStorage.getStorageAsJSON(CART_KEY);
+  cart = new Cart(items);
+}
+else {
+  cart = new Cart();
+}
+cart.updateCart();
+let allProducts = [];
 // Function to fetch and render products
 async function loadProducts() {
   const productsContainer = document.getElementById("products");
-  productsContainer.innerHTML = "<p>Loading products...</p>"; // Temporary message while loading
+  productsContainer.innerHTML = "<p>Loading products...</p>";
 
   try {
     const products = await fetchProducts();
-    productsContainer.innerHTML = ""; // Clear loading text
+    allProducts = products;
+    productsContainer.innerHTML = "";
 
     if (products.length > 0) {
-      products.forEach((product) => {
-        const productCard = createProductCard(product);
-        productsContainer.appendChild(productCard);
-      });
+      let productBuilder = new Builder();
+      for (let x = 0; x < products.length; x++) {
+        productBuilder.buildProductCard(products[x]);
+        let productCards = productBuilder.build();
+        productsContainer.append(productCards[x]);
+      }
     } else {
       productsContainer.innerHTML = "<p>No products available.</p>";
     }
@@ -23,22 +40,28 @@ async function loadProducts() {
     console.error("Error fetching products:", error);
     productsContainer.innerHTML = "<p>Failed to load products.</p>";
   }
-}
-
-// Function to create an individual product card
-function createProductCard(product) {
-  const element = document.createElement("div");
-  element.className = "product-card";
-
-  element.innerHTML = `
-    <h3>${product.name}</h3>
-    <p>$${product.price.toFixed(2)}</p>
-    <button class="add-to-cart-btn">Add to Cart</button>
-  `;
-
-  element.querySelector(".add-to-cart-btn").addEventListener("click", () => {
-    alert(`Adding ${product.name} to cart\nFunctionality not implemented yet`);
+  let addProductBtns = document.querySelectorAll(".add-to-cart-btn");
+  addProductBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let product = allProducts.find((p) => p._id == btn.id.substring(btn.id.lastIndexOf("-") + 1));
+      console.log(product);
+      addToCart(product);
+    });
   });
-
-  return element;
 }
+
+const addToCart = (product) => {
+  cart.addItem(product);
+  cart.updateCart();
+  LocalStorage.saveToStorage(CART_KEY, product);
+}
+
+const manageProductsBtn = document.querySelector("#manageProductsBtn");
+const modal = document.querySelector("#modal");
+manageProductsBtn.addEventListener("click", () => {
+  modal.showModal();
+});
+
+document.querySelector("#closeModal").addEventListener("click", () => {
+  modal.close();
+});
