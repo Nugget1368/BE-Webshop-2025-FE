@@ -42,6 +42,10 @@ async function loadProducts() {
     console.error("Error fetching products:", error);
     productsContainer.innerHTML = "<p>Failed to load products.</p>";
   }
+  renderProductCardEventListeners(allProducts);
+}
+
+const renderProductCardEventListeners = (allProducts = []) => {
   let addProductBtns = document.querySelectorAll(".add-to-cart-btn");
   addProductBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -51,12 +55,19 @@ async function loadProducts() {
   });
   let products = document.querySelectorAll(".product-card");
   products.forEach((product) => {
-    product.addEventListener("click", () => {
-      let builder = new Builder();
-      builder.buildProductCardInfo(allProducts.find((p) => p._id == product.id));
-      let productInfo = builder.build();
-      document.querySelector("#modalContent").append(productInfo[0]);
-      modal.showModal();
+    product.addEventListener("click", (event) => {
+      if (event.target.tagName.toLowerCase() !== "button") {
+        let builder = new Builder();
+        builder.buildProductCardInfo(allProducts.find((p) => p._id == product.id));
+        let productInfo = builder.build();
+        let modalContent = document.querySelector("#modalContent");
+        modalContent.append(productInfo[0]);
+        modal.showModal();
+        let addToCartBtn = modalContent.querySelector(".add-to-cart-btn");
+        addToCartBtn.addEventListener("click", () => {
+          addToCart(allProducts.find((p) => p._id == product.id));
+        });
+      }
     })
   })
 }
