@@ -43,10 +43,7 @@ async function loadProducts() {
   let addProductBtns = document.querySelectorAll(".add-to-cart-btn");
   addProductBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      console.log(btn);
-      //Hittar inte id:et, söker på add-to-cart-{id}, behöver söka på bara {id}-nummer
-      let product = allProducts.find((p) => p.id == btn.id);
-      console.log(product);
+      let product = allProducts.find((p) => p.id == btn.id.substring(btn.id.lastIndexOf("-") + 1));
       addToCart(product);
     });
   });
