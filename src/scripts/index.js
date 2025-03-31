@@ -43,7 +43,8 @@ async function loadProducts() {
   let addProductBtns = document.querySelectorAll(".add-to-cart-btn");
   addProductBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      let product = allProducts.find((p) => p.id == btn.id.substring(btn.id.lastIndexOf("-") + 1));
+      let product = allProducts.find((p) => p._id == btn.id.substring(btn.id.lastIndexOf("-") + 1));
+      console.log(product);
       addToCart(product);
     });
   });

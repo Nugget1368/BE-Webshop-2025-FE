@@ -7,9 +7,9 @@ export class ProductFormBuilder {
     this.form = document.createElement("form");
     this.form.id = "createProduct";
 
-    this.form.addEventListener("submit", (e) => {
+    this.form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      this.handleSubmit();
+      await this.handleSubmit();
     });
   }
   addTextField(id, label, required = true) {
@@ -63,7 +63,7 @@ export class ProductFormBuilder {
     return this;
   }
 
-  handleSubmit() {
+  async handleSubmit() {
     let nameValue = document.querySelector("form#createProduct input#name").value;
     let priceValue = Number.parseFloat(document.querySelector("form#createProduct input#price").value);
     let descrValue = document.querySelector("form#createProduct input#description").value;
@@ -73,9 +73,10 @@ export class ProductFormBuilder {
     let product = new Product(nameValue, priceValue, descrValue, stockValue, imageValue);
     console.log(product);
 
-    addProduct("products", product);
-
-    event.preventDefault();
+    let response = await addProduct("products", product);
+    console.log(response);
+    modal.close();
+    location.reload(); // Ladda om sidan för att visa ändringarna
   }
 
   render() {
