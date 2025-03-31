@@ -35,26 +35,21 @@ export class Builder {
         <h3>${product.name}</h3>
         <p>$${product.price.toFixed(2)}</p>
       `;
-    let button = this.buildAddToCartBtn(element.id);
-    button.forEach((btn) => {
-      element.append(btn);
-    });
+    let btnContainer = document.createElement("div");
+    let editBtn = this.buildBtn("Edit", "edit-product-btn", `edit-product-${element.id}`);
+    let deleteBtn = this.buildBtn("Delete", "delete-product-btn", `delete-product-${element.id}`);
+    let addToCartBtn = this.buildBtn("Add To Cart", "add-to-cart-btn", `add-to-cart-${element.id}`);
+    btnContainer.append(editBtn, deleteBtn, addToCartBtn);
+    element.append(btnContainer);
 
     this.resultArr.push(element);
   }
 
-  buildAddToCartBtn(id = "") {
+  buildBtn(text = "", classname = "", id = "") {
     let button = document.createElement("button");
-    let editButton = document.createElement("button");
-    editButton.classList.add("edit-product-btn");
-    editButton.textContent = "Edit";
-    let deleteButton = document.createElement("button");
-    deleteButton.classList.add("delete-product-btn");
-    deleteButton.textContent = "Delete";
-    button.textContent = "Add to cart";
-    button.classList.add("add-to-cart-btn");
-    button.id = `add-to-cart-${id}` || `add-to-cart-id`;
-    let array = [button, editButton, deleteButton];
-    return array;
+    button.textContent = text;
+    classname === "" ? "" : button.classList.add(classname);
+    id === "" ? "" : button.id = id;
+    return button;
   }
 }

@@ -38,6 +38,8 @@ export class ProductFormBuilder {
 
     const input = document.createElement("input");
     input.type = "number";
+    input.min = 0;
+    input.step = 0.01;
     input.id = id;
     input.name = id;
     if (required) {
