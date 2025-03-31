@@ -1,27 +1,11 @@
 {
   "products": [
     {
-      "id": "ef72",
-      "name": "Tre bilar",
-      "price": 999,
-      "description": "Medelsnabba",
-      "stock": 123,
-      "imageUrl": "Nja"
-    },
-    {
       "id": "4b0a",
       "name": "Banan",
       "price": 20,
       "description": "Rosa banan",
       "stock": 2,
-      "imageUrl": "saknas"
-    },
-    {
-      "id": "7f04",
-      "name": "a",
-      "price": 2,
-      "description": "w",
-      "stock": 222222,
       "imageUrl": "saknas"
     },
     {
@@ -31,6 +15,30 @@
       "description": "Fin båt",
       "stock": 3,
       "imageUrl": "saknas"
+    },
+    {
+      "id": "fbe6",
+      "name": "Juice",
+      "price": 1.99,
+      "description": "Vanlig juice",
+      "stock": 10,
+      "imageUrl": "saknas"
+    },
+    {
+      "id": "945d",
+      "name": "Alvedon",
+      "price": 20.89,
+      "description": "Mot huvudverk och ångest",
+      "stock": 22,
+      "imageUrl": "saknas"
+    },
+    {
+      "id": "2b42",
+      "name": "Smäll karamell",
+      "price": 10.99,
+      "description": "Karameller som smäller",
+      "stock": 20,
+      "imageUrl": "sa"
     }
   ]
 }

@@ -2,7 +2,7 @@ import { fetchProducts, addProduct, deleteProduct } from "../utils/api.js";
 import { Product } from "../classes/product.js";
 import { Cart } from "../classes/cart.js";
 import { LocalStorage, CART_KEY } from "../utils/localstorage.js";
-import { ProductFormBuilder } from "../builders/builders.js";
+import { ProductFormBuilder } from "../builders/ProductFormBuilder.js";
 import { Builder } from "../builders/builder.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
