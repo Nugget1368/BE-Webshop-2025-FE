@@ -71,10 +71,8 @@ export class ProductFormBuilder {
     let imageValue = document.querySelector("form#createProduct input#imageUrl").value;
 
     let product = new Product(nameValue, priceValue, descrValue, stockValue, imageValue);
-    console.log(product);
 
     let response = await addProduct("products", product);
-    console.log(response);
     modal.close();
     location.reload(); // Ladda om sidan för att visa ändringarna
   }
@@ -110,11 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", function (event) {
     if (event.target && event.target.classList.contains("delete-product-btn")) {
       const productCard = event.target.closest(".product-card");
-      console.log(productCard);
       const productName = productCard.querySelector("h3").textContent;
-      console.log(productName);
       const productId = productCard.id;
-      console.log(productId);
 
       const modalContent = document.querySelector("#modalContent");
       const modal = document.querySelector("#modal");
@@ -144,12 +139,10 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("confirmDeleteBtn").addEventListener("click", () => {
         deleteProduct("products", productId)
           .then(() => {
-            console.log("Produkt borttagen!");
             modal.close();
             location.reload(); // Ladda om sidan för att visa ändringarna
           })
           .catch((error) => {
-            console.error("Fel vid borttagning:", error);
             alert("Ett fel uppstod när produkten skulle tas bort");
           });
       });

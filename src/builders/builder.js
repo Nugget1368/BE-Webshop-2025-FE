@@ -19,11 +19,8 @@ export class Builder {
     let info = document.createElement("article");
     info.classList.add("product-card");
     info.id = product._id ? product._id : "missing-id";
-    let button = this.buildAddToCartBtn(info.id);
-    info.append(name, price, description, image);
-    button.forEach((btn) => {
-      info.append(btn);
-    });
+    let button = this.buildBtn("Buy", "add-to-cart-btn", info.id);
+    info.append(image, name, price, description, button);
     this.resultArr.push(info);
   }
 
