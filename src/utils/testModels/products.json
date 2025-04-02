@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "_id": "4b0a",
+      "id": "4b0a",
       "name": "Banan",
       "price": 20,
       "description": "Rosa banan",
@@ -9,7 +9,7 @@
       "imageUrl": "https://picsum.photos/200"
     },
     {
-      "_id": "eb9b",
+      "id": "eb9b",
       "name": "Båt",
       "price": 12,
       "description": "Fin båt",
@@ -17,7 +17,7 @@
       "imageUrl": "https://picsum.photos/200"
     },
     {
-      "_id": "fbe6",
+      "id": "fbe6",
       "name": "Juice",
       "price": 1.99,
       "description": "Vanlig juice",
@@ -25,7 +25,7 @@
       "imageUrl": "https://picsum.photos/200"
     },
     {
-      "_id": "945d",
+      "id": "945d",
       "name": "Alvedon",
       "price": 20.89,
       "description": "Mot huvudverk och ångest",
@@ -33,7 +33,7 @@
       "imageUrl": "https://picsum.photos/200"
     },
     {
-      "_id": "2b42",
+      "id": "2b42",
       "name": "Smäll karamell",
       "price": 10.99,
       "description": "Karameller som smäller",

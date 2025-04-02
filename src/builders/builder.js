@@ -18,7 +18,7 @@ export class Builder {
     description.textContent = product.description;
     let info = document.createElement("article");
     info.classList.add("product-card");
-    info.id = product._id ? product._id : "missing-id";
+    info.id = product.id ? product.id : "missing-id";
     let button = this.buildBtn("Buy", "add-to-cart-btn", info.id);
     info.append(image, name, price, description, button);
     this.resultArr.push(info);
@@ -27,7 +27,7 @@ export class Builder {
   buildProductCard(product) {
     const element = document.createElement("article");
     element.className = "product-card";
-    element.id = product._id ? product._id : "missing-id";
+    element.id = product.id ? product.id : "missing-id";
     element.innerHTML = `
         <h3>${product.name}</h3>
         <p>$${product.price.toFixed(2)}</p>
