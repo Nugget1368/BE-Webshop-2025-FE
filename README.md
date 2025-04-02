@@ -102,4 +102,71 @@ json-server products.json --port 5001
 
 Nu har du startat upp en lokal databas som kan simulera testdatat i products.json.
 
+### localstorage.js
+I denna fil lagras alla funktioner förknippade med Local-storage.
+
+#### Sträng-konstanter
+För att spara och hämta mellan localstorage krävs att man i anropet skickar med en **sträng som nyckeln** till de lagrade värdena o localstorage. För att undvika stavfel vid flertalet anrop **finns sträng-konstanter**, dvs. en variabel med en sträng som kan återanvändas och uppdateras i alla anrop.
+
+##### Konstanter:
++ **CART_KEY**, innehåller nyckeln för kundvagnen i localstorage
+
+
+#### getStorageAsJSON
+Returnerar den angivna localstorage-nyckelns värden som objekt **konverterade ifrån JSON**.
+
+```js
+    static getStorageAsJSON(storageName) {
+        return JSON.parse(localStorage.getItem(storageName));
+    }
+  //Example
+let cart = getStorageAsJSON(CART_KEY);
+console.log(cart.items); //Output: En array av objekt från Localstorage sparningen "products"
+```
+
+
+#### Save To Storage
+Denna metod är tänkt att användas för att spara till Localstorage.
+
+
+>**Parametrar**:
+**storageName** - Namnet för nyckeln i Localstorage som man vill komma åt, exempelvis "products" eller "user".
+**obj** - Det objekt man vill spara som värde i localstorage.
+
+```js
+const saveToStorage = (storageName, obj) =>{
+    if(localStorage.getItem(storageName)){
+        let storage = JSON.parse(localStorage.getItem(storageName));
+        storage.push(obj);
+        localStorage.setItem(storageName, JSON.stringify(storage));
+    }
+    else{
+        let arr = [];
+        arr.push(obj);
+        localStorage.setItem(storageName, JSON.stringify(arr));
+    }   
+}
+```
+
+I metodens första rad sker en if-sats som kontrollerar ifall nyckeln existerar. Om den existerar vill vi lägga till det nya värdet i listan av värden. Detta är viktigt eftersom vi lagrar alla värden i en Array och inte vill **råka ersätta hela arrayen med det nya värdet vi försöker lägga till**.
+
+För att lägga till objektet krävs att vi först hämtar hela listan, **pushar** värdet in i arrayen och därefter skriver vi över den gamla arrayen som finns lagrad med den nya vi precis skapat.
+
+Om nyckeln istället **inte existerar** vill vi skapa en ny array och lägga till det nya värdet i arrayen. Därefter spara arrayen i localstorage.
+
+```js
+if(localStorage.getItem(storageName)){
+    // Nyckeln finns angiven sen tidigare
+}
+else{
+    // Nyckeln finns inte angiven sen tidigare, skapa en ny Array att spara som värde
+}
+```
+
+>**JSON.stringify & JSON.parse**
+För att **minska storleken** på datan som lagras i localstorage är det **viktigt** att vi inte sparar vardera objekt som de är, utan istället **konverterar de till JSON-strängar** (JSON.stringify).
+>
+>När vi sedan hämtar datan behöver vi då även konvertera tillbaka datan från JSON till objekten vi hämtat (JSON.parse).
+
+
 ****
