@@ -5,6 +5,15 @@ Applikation som hanterar ett externt api och simulerar en online matvarubutik.
 ## :star: Classes
 Här finner vi alla klasser som används genom projektet:
 + **product.js**, innehåller modelen som används för en produkt.
++ **cart.js**, innehåller modelen som används för en varukorg.
++ **user.js**, innehåller modelen som används för en user, samt en ärvande klass Admin.
+
+### Cart.js
+I Varukorgen hittar vi en konstruktor med en array _items_, det är här som alla produkter som användaren valt bör lagras. Klassen kommer med metoderna:
++ **getItems( )**, som returnerar _arrayen 'items'_.
++ **addItem( )**, som lägger till en produkt i arrayen _arrayen 'items'_.
++ **gettotal( )**, returnerar det **totala priset** för alla produkter i varukorgen.
++ **updateCart( )**, uppdaterar Varukorgen i DOM:en.
 
 
 ## :star: Builders
