@@ -72,11 +72,34 @@ const renderProductCardEventListeners = (allProducts = []) => {
   })
 }
 
+const openCart = (parentElement, userCart) => {
+  let builder = new Builder();
+  builder.buildCartInfo(userCart);
+  let child = builder.build();
+  child.forEach((c) => parentElement.append(c));
+}
+
 const addToCart = (product) => {
   cart.addItem(product);
   cart.updateCart();
   LocalStorage.saveToStorage(CART_KEY, product);
 }
+
+const cartBtn = document.querySelector("[data-cart]");
+const closeCartBtn = document.querySelector("[data-close-bar]");
+closeCartBtn.addEventListener("click", () => {
+  let sidebar = document.querySelector("dialog[data-sidebar]");
+  sidebar.close();
+});
+cartBtn.addEventListener("click", () => {
+  let sidebar = document.querySelector("dialog[data-sidebar]");
+  let section = sidebar.querySelector("dialog[data-sidebar] section");
+  openCart(section, cart);
+  sidebar.showModal();
+  sidebar.addEventListener("close", () => {
+    section.innerHTML = "";
+  });
+});
 
 const manageProductsBtn = document.querySelector("#manageProductsBtn");
 manageProductsBtn.addEventListener("click", () => {
