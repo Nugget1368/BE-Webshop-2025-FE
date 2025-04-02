@@ -18,17 +18,21 @@ function handleRegister() {
     lastname: "Bobert",
     email: "bobert@example.com",
     password: "12345678",
-    isAdmin: false
+    isadmin: false
   }
   console.log(user);
   auth.register(user);
 }
 
-function handleLogin() {
+async function handleLogin() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  auth.login(username, password);
+  let response = await auth.login(username, password);
+  console.log(response.token);
+
+  sessionStorage.setItem("token", response.token);
+  window.location.href = "index.html";
 
   // Basic demo login - NOT SECURE
   // if (username === "admin" && password === "admin") {
