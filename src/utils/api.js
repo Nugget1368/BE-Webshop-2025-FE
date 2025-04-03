@@ -1,3 +1,5 @@
+import { auth } from "./auth.js";
+
 export function getBaseUrl() {
   // Get the group number from the hostname to determine the base URL for BE
   const regex = /webshop\-2025\-(g[0-9]{1,2})\-fe/g;
@@ -14,7 +16,7 @@ export async function fetchProducts(endpoint = "products") {
   //! DONT USE THIS IN PRODUCTION
   const url = `${getBaseUrl()}${endpoint}`;
   // const response = await axios.get(url);
-  let token = sessionStorage.getItem("token");
+  let token = auth.getToken();
   /* KOLLA HÄR */
   const response = await axios.get("https://webshop-2025-be-g4.vercel.app/api/products", {headers: {authorization: `Bearer ${token}`}})
   if (response.status === 200) {
@@ -25,7 +27,8 @@ export async function fetchProducts(endpoint = "products") {
 
 export async function addProduct(endpoint = "products", product) {
   const url = `${getBaseUrl()}${endpoint}`;
-  const response = await axios.post(url, product);
+  let token = auth.getToken();
+  const response = await axios.post(url, product, {headers: {authorization: `Bearer ${token}`}});
   if (response.status === 201) {
     return response.data;
   }
