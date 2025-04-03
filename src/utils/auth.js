@@ -3,6 +3,7 @@
     * Detta görs genom att skicka med en header i anropet, 
     * exempelvis axios.get("https://webshop-2025-be-g4.vercel.app/api/products", {headers: {authorization: `Bearer ${token}`}})
 */
+const TOKEN_KEY = "token";
 
 export class auth{
     static async register(user){
@@ -27,5 +28,13 @@ export class auth{
         catch(err){
             return err.message;
         }
+    }
+
+    static saveToken(token){
+        sessionStorage.setItem(TOKEN_KEY, token);
+    }
+
+    static getToken(){
+        return sessionStorage.getItem(TOKEN_KEY);
     }
 }

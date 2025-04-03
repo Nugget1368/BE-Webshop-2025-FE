@@ -29,18 +29,9 @@ async function handleLogin() {
   const password = document.getElementById("password").value;
 
   let response = await auth.login(username, password);
-  console.log(response.token);
-
-  sessionStorage.setItem("token", response.token);
+  auth.saveToken(response.token);
+  //TODO Go to Admin-page or go to User page
   window.location.href = "index.html";
-
-  // Basic demo login - NOT SECURE
-  // if (username === "admin" && password === "admin") {
-  //   window.location.href = "admin.html";
-  // } else {
-  //   alert("Invalid credentials: LOGGING IN ANYWAY");
-  //   window.location.href = "admin.html";
-  // }
 }
 
 let registerBtn = document.querySelector("button#registerButton");
