@@ -42,3 +42,21 @@ export async function deleteProduct(endpoint = "products", productId) {
   }
   return [];
 }
+
+export async function getProductById(endpoint = "products", productId) {
+  const url = `${getBaseUrl()}${endpoint}/${productId}`;
+  const response = await axios.get(url);
+  if (response.status === 200) {
+    return response.data;
+  }
+  return null;
+}
+
+export async function updateProduct(endpoint = "products", productId, product) {
+  const url = `${getBaseUrl()}${endpoint}/${productId}`;
+  const response = await axios.put(url, product);
+  if (response.status === 200) {
+    return response.data;
+  }
+  return null;
+}
