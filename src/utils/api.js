@@ -45,7 +45,9 @@ export async function deleteProduct(endpoint = "products", productId) {
 
 export async function getProductById(endpoint = "products", productId) {
   const url = `${getBaseUrl()}${endpoint}/${productId}`;
-  const response = await axios.get(url);
+  console.log(productId);
+  let token = auth.getToken();
+  const response = await axios.get(url, {headers: {authorization: `Bearer ${token}`}});
   if (response.status === 200) {
     return response.data;
   }
@@ -54,7 +56,8 @@ export async function getProductById(endpoint = "products", productId) {
 
 export async function updateProduct(endpoint = "products", productId, product) {
   const url = `${getBaseUrl()}${endpoint}/${productId}`;
-  const response = await axios.put(url, product);
+  let token = auth.getToken();
+  const response = await axios.put(url, product, {headers: {authorization: `Bearer ${token}`}});
   if (response.status === 200) {
     return response.data;
   }

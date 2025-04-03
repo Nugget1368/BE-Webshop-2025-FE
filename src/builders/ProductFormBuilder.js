@@ -98,7 +98,8 @@ export class ProductFormBuilder {
 
     try {
       if (productId) {
-        product.id = productId;
+        product._id = productId;
+        console.log(product._id);
         await updateProduct("products", productId, product);
       } else {
         await addProduct("products", product);
