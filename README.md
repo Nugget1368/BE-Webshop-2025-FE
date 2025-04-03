@@ -7,6 +7,8 @@ Applikation som hanterar ett externt api och simulerar en online matvarubutik.
 Här finner vi alla klasser som används genom projektet:
 
 - **product.js**, innehåller modelen som används för en produkt.
+- **productFormBuilder.js**, detta är en produkthanteringsklass som låter dig skapa ett nytt produktkort.
+- **productHandler.js**, detta är en produkthanteringsklass som låter dig ändra och ta bort ett redan skapat produktkort.
 - **cart.js**, innehåller modelen som används för en varukorg.
 - **user.js**, innehåller modelen som används för en user, samt en ärvande klass Admin.
 
@@ -30,16 +32,18 @@ Här finner vi alla [Builder-klasser](https://refactoring.guru/design-patterns/b
 ### Product Form Builder
 
 **Funktionalitet**
+Denna klass används för att bygga formulär för produkter.
 
-Klassen har tre huvudfunktioner:
+<u>Den är ansvarig för:</u>
 
-- Lägga till produkter: Plockar upp ett formulär för att lägga till nya produkter.
-- Ta bort produkter: Visar en bekräftelsedialog innan en produkt tas bort
-- Redigera produkter: Visar en bekräftelsedialog innan en produkt redigeras med ifyllda uppgifter om produkten som redan ligger inne. EJ KLART!
+- Skapa textfält, nummerfält och knappar
+- Återanvändbar i både skapa och uppdatera scenarios
+- Hantera inskickning av formulärdata till API
+<hr>
 
-#### Så här används koden:
+#### Så här används koden
 
-**Lägg till produkt**
+**Lägg till produkt:**
 
 Användaren klickar på knappen _"Skapa en produkt_" (#manageProductsBtn)
 Ett formulär visas i en modal där användaren behöver fylla i:
@@ -52,14 +56,17 @@ Ett formulär visas i en modal där användaren behöver fylla i:
 
 När formuläret skickas så samlas data in från formuläret och en ny produktinstans skapas. Produkten läggs sedan till genom ett API-anrop och sidan laddas om för att visa den nya produkten
 
-**För att ta bort en produkt:**
+<hr>
 
-Användaren klickar på _"ta bort"-knappen_ på en produktkort
-En bekräftelsedialog visas då upp som frågar om användaren verkligen vill ta bort produkten
-Om användaren bekräftar så skickas produkten upp och tas bort genom ett API-anrop (**Se api.js**). Sidan laddas sen om för att uppdatera produktlistan och produktkortet är borttaget.
+**populateWithProductData():**
+När formuläret skapas för att redigera en produkt, används metoden för att fylla i formulärets fält med den befintliga produktdatan. Denna metod tar emot produktobjektet som hämtats från API och placerar värden i motsvarande formulärfält. Dessutom sparar metoden produktens ID i formulärets dataset, vilket är avgörande för att systemet ska veta att det handlar om en uppdatering och inte en ny produkt när formuläret skickas in.
 
-**För att ta redigera en produkt:**
-KOMMER SEN!
+<hr>
+
+<u>ProductFormBuilder använder två API-anrop ([api](/src/utils/api.js)):</u>
+
+- **addProduct**, för att lägga till en ny produkt i databasen.
+- **updateProduct**, för att uppdatera en befintlig produkt baserat på dess ID (se product handler)
 
 **I den aktuella implementeringen:**
 
@@ -67,37 +74,66 @@ KOMMER SEN!
 - Den använder _Product-klassen_ från "classes/product.js" för att skapa nya produktobjekt.
 - När användaren klickar på knappen med ID _"manageProductsBtn"_, skapas ett formulär i modalen.
 
-Formuläret byggs med följande fält:
+### Product Handlers
+
+Denna fil innehåller funktioner för att hantera edit- och delete-funktionalitet.
+
+**handleEditButtonClick:** Lyssnar efter klick på edit-knappar, hämtar produktdata och visar redigeringsformuläret
+**handleDeleteButtonClick:** Hanterar borttagning av produkter med bekräftelsedialog
+**initProductHandlers:** Initierar event listeners för produkt-interaktioner
+
+<hr>
+
+**För att ta bort en produkt:**
+När användaren klickar på _"Delete"-knappen"_ på en produkt så sker följande:
+
+- handleDeleteButtonClick i productHandlers.js anropas
+- En bekräftelsedialog visas
+- Om användaren bekräftar, tas produkten bort via API med deleteProduct
+- Sidan laddas om för att visa ändringarna
+
+**För att ta redigera en produkt:**
+När användaren klickar på _"Edit"-knappen"_ på en produkt sker följande:
+
+- handleEditButtonClick i productHandlers.js anropas
+- Produktens befintliga data hämtas från API med getProductById
+- ProductFormBuilder används för att skapa ett formulär som fylls med produktdata
+- Användaren kan ändra produktuppgifter
+- När formuläret skickas anropas ProductFormBuilder's handleSubmit-metod som uppdaterar produkten
+- Sidan laddas om för att visa ändringarna
+
+<hr>
+
+<u>Product Handler använder följande två API-anrop ([api](/src/utils/api.js)):</u>
+
+- **getProductById**, används när användaren klickar på edit-knappen för att hämta den specifika produktens data från databasen
+- **deleteProduct**, används när användaren bekräftar borttagning av en produkt
+
+_productHandler hanterar inte direkt produktskapande eller uppdatering. Den förbereder endast formuläret för redigering genom att hämta data och skapar en bekräftelsedialog för borttagning. När användaren skickar in ett formulär som initierats av handleEditButtonClick, är det fortfarande **ProductFormBuilder-klassen** som hanterar själva uppdateringen._
+
+**Formulärhantering**
+
+Både för att skapa och redigera en produkt byggs formuläret med samma fält:
 
 ```js
-//Deklarera variabeln
-let addProductBtn = document.querySelector("#manageProductsBtn");
+// Exempel på hur formuläret byggs
+const productForm = new ProductFormBuilder("#modalContent");
 
-addProductBtn.addEventListener("click", () => {
-  modalContent.innerHTML = "";
-  // Skapa och konfigurera formulärbyggaren
-  const productForm = new ProductFormBuilder("#modalContent");
-
-  // Bygg formuläret med metoder från builder-klassen
-  productForm
-    .addTextField("name", "Name:")
-    .addNumberField("price", "Price:")
-    .addTextField("description", "Description:")
-    .addNumberField("stock", "Stock:")
-    .addTextField("imageUrl", "Image:")
-    .addButton("createProductBtn", "Lägg till produkt")
-    .render();
-});
+productForm
+  .addTextField("name", "Name:")
+  .addNumberField("price", "Price:")
+  .addTextField("description", "Description:")
+  .addNumberField("stock", "Stock:")
+  .addTextField("imageUrl", "Image:")
+  .addButton("createProductBtn", "Lägg till produkt")
+  .render();
 ```
-
-- För borttagning av produkter finns det klickbara element med klassen _"delete-product-btn"_ inuti element med klassen "product-card"
-- Både vid tillägg och borttagning används en modal med ID "modal" och innehåll placeras i ett element med ID "modalContent"
 
 ### Builder-klassen
 
 I builder klassen har vi en konstruktor med en **resultat Array** som property. När vi bygger saker i klassen vill vi returnera element i **Resultat-arrayen**. Man kan säga att man fyller på resultat-arrayen och när man är nöjd returnerar man resultatet med hjälp av **build()-Metoden**
 
-```js
+````js
 export class Builder {
   constructor() {
     this.resultArr = [];
@@ -107,7 +143,7 @@ export class Builder {
     return this.resultArr;
   }
 }
-```
+
 
 **Exempel**:
 I exemplet nedan har vi 3 produkter, product1, product2, product3. Vi vill bygga kort för dessa 3 produkter i DOM:en. Då använder vi oss av buildProductCard-buildermetoden i Klassen Builder. För vardera gång vi påkallar metoden så kommer **Resultat-Arrayen** fyllas på med 1 nytt produktkort. Efter 3 metod-anrop har vi alltså en array med 3 värden i sig.
@@ -125,7 +161,7 @@ let result = builder.Build();
 result.foreach((element) => {
   document.body.append(element);
 });
-```
+````
 
 #### Metod-Anrop
 

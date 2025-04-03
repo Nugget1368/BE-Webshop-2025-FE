@@ -1,30 +1,6 @@
 {
   "products": [
     {
-      "id": "4b0a",
-      "name": "Banan",
-      "price": 20,
-      "description": "Rosa banan",
-      "stock": 2,
-      "imageUrl": "https://picsum.photos/200"
-    },
-    {
-      "id": "eb9b",
-      "name": "Båt",
-      "price": 12,
-      "description": "Fin båt",
-      "stock": 3,
-      "imageUrl": "https://picsum.photos/200"
-    },
-    {
-      "id": "fbe6",
-      "name": "Juice",
-      "price": 1.99,
-      "description": "Vanlig juice",
-      "stock": 10,
-      "imageUrl": "https://picsum.photos/200"
-    },
-    {
       "id": "945d",
       "name": "Alvedon",
       "price": 20.89,
@@ -39,6 +15,22 @@
       "description": "Karameller som smäller",
       "stock": 20,
       "imageUrl": "https://picsum.photos/200"
+    },
+    {
+      "name": "Nathalie",
+      "price": 1,
+      "description": "Rosa bananaaaaaaaaaaaaaaaa",
+      "stock": 2,
+      "imageUrl": "saknas",
+      "id": "3a8c"
+    },
+    {
+      "name": "Rosa Banan",
+      "price": 23,
+      "description": "Cool banan",
+      "stock": 1,
+      "imageUrl": "https://as2.ftcdn.net/jpg/03/09/19/21/1000_F_309192134_fkCwnHiRh4fEMOXfTVMhH1v9mibbP2Su.jpg",
+      "id": "6be3"
     }
   ]
 }
