@@ -11,19 +11,6 @@ function initLogin() {
   });
 }
 
-function handleRegister() {
-  // let user = new User("Robert", "Bobert", "bobert@example.com", "12345678");
-  let user = {
-    firstname: "Robert",
-    lastname: "Bobert",
-    email: "bobert@example.com",
-    password: "12345678",
-    isadmin: false
-  }
-  console.log(user);
-  auth.register(user);
-}
-
 async function handleLogin() {
   const username = document.querySelector("#username");
   const password = document.querySelector("#password");
@@ -52,3 +39,8 @@ async function handleLogin() {
     // window.location.href = "index.html";
   }
 }
+
+let registerBtn = document.querySelector("button#registerButton");
+registerBtn.addEventListener("click", () => {
+  window.location.href = "register.html";
+});

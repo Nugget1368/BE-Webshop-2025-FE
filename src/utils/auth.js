@@ -9,7 +9,7 @@ export class auth {
     static async register(user) {
         try {
             let response = await axios.post("https://webshop-2025-be-g4.vercel.app/api/auth/register", user);
-            return response.data;
+            return response;
         }
         catch (err) {
             return err.message;
