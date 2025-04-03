@@ -44,5 +44,7 @@ async function handleLogin() {
 }
 
 let registerBtn = document.querySelector("button#registerButton");
-console.log(registerBtn);
-registerBtn.addEventListener("click", handleRegister);
+// console.log(registerBtn);
+registerBtn.addEventListener("click", () => {
+  window.location.href = "register.html";
+});
