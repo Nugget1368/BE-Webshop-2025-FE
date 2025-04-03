@@ -1,8 +1,3 @@
-/*
-    * För att göra ett anrop, exempelvis getproducts, behövs att man skickar med 'authentication' : 'bearer {token vi fått från login}'
-    * Detta görs genom att skicka med en header i anropet, 
-    * exempelvis axios.get("https://webshop-2025-be-g4.vercel.app/api/products", {headers: {authorization: `Bearer ${token}`}})
-*/
 const TOKEN_KEY = "token";
 
 export class auth {
