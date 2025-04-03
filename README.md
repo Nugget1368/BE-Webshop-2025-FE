@@ -139,6 +139,11 @@ result.foreach((element) => {
 ## :star: Scripts
 
 De javascript som **direkt** hanterar DOM:en på en sida. Det kan röra sig om exempelvis att **rendera objekt** eller **hantera eventlisteners**.
++ **index.js**, Hanterar event på startsidan.
++ **login.js**, Hanterar event kring inloggning.
+
+### :seedling: Login.js
+Innehåller ett formulär som användaren kan fylla i för att logga in på sidan. När användaren trycker _submit_ i formuläret triggas funktionen **Handle Login**. Den tar in de värden som användaren matat in, och skickar vidare dessa till **[login-metoden i klassen auth.js](./src/utils/auth.js)**. Om inloggningen är giltig så förs användaren till nästa sida, annars markeras fälten som inkorrekta.
 
 ---
 
