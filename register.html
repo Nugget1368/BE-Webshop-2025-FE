@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Hakim Livs</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <h1>Registrera användare</h1>
+      <div id="register-container">
+        <form id="registerForm" class="register-form">
+          <div class="form-group">
+            <label for="firstName">Förnamn</label>
+            <input type="text" id="firstName" required />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Efternamn</label>
+            <input type="text" id="lastName" required />
+          </div>
+          <div class="form-group">
+            <label for="email">E-postadress</label>
+            <input type="email" id="email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Lösenord</label>
+            <input type="password" id="password" required />
+          </div>
+          <div class="form-group">
+            <label for="isAdmin">Admin-användare</label>
+            <input type="checkbox" id="isAdmin"/>
+          </div>
+          <button type="submit">Registrera användare</button>
+        </form>
+      </div>
+    </main>
+
+    <!-- PAGE-SPECIFIC JAVASCRIPT -->
+    <script type="module" src="./src/scripts/register.js"></script>
+  </body>
+</html>

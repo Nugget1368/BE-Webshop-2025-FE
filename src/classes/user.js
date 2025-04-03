@@ -1,13 +1,15 @@
 export class User {
-    constructor(name, email, password) {
-        this.name = name;
+    constructor(name, lastName, email, password) {
+        this.firstname = name;
+        this.lastname = lastName;
         this.email = email;
         this.password = password;
     }
 }
 
 export class Admin extends User {
-    constructor(name, email, password) {
-        super(name, email, password);
+    constructor(name,lastName, email, password) {
+        super(name,lastName, email, password);
+        this.isadmin = true;
     }
 }

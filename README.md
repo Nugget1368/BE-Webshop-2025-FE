@@ -12,7 +12,7 @@ Här finner vi alla klasser som används genom projektet:
 - **cart.js**, innehåller modelen som används för en varukorg.
 - **user.js**, innehåller modelen som används för en user, samt en ärvande klass Admin.
 
-### Cart.js
+### :seedling: Cart.js
 
 I Varukorgen hittar vi en konstruktor med en array _items_, det är här som alla produkter som användaren valt bör lagras. Klassen kommer med metoderna:
 
@@ -29,7 +29,7 @@ Här finner vi alla klasser som används genom projektet:
 
 Här finner vi alla [Builder-klasser](https://refactoring.guru/design-patterns/builder). En Builder är ett design-pattern, en mall eller ett mönster som vi kan följa när vi vill rendera data i DOM:en.
 
-### Product Form Builder
+### :seedling: Product Form Builder
 
 **Funktionalitet**
 Denna klass används för att bygga formulär för produkter.
@@ -129,7 +129,10 @@ productForm
   .render();
 ```
 
-### Builder-klassen
+- För borttagning av produkter finns det klickbara element med klassen _"delete-product-btn"_ inuti element med klassen "product-card"
+- Både vid tillägg och borttagning används en modal med ID "modal" och innehåll placeras i ett element med ID "modalContent"
+
+### :seedling: Builder-klassen
 
 I builder klassen har vi en konstruktor med en **resultat Array** som property. När vi bygger saker i klassen vill vi returnera element i **Resultat-arrayen**. Man kan säga att man fyller på resultat-arrayen och när man är nöjd returnerar man resultatet med hjälp av **build()-Metoden**
 
@@ -175,6 +178,11 @@ result.foreach((element) => {
 ## :star: Scripts
 
 De javascript som **direkt** hanterar DOM:en på en sida. Det kan röra sig om exempelvis att **rendera objekt** eller **hantera eventlisteners**.
++ **index.js**, Hanterar event på startsidan.
++ **login.js**, Hanterar event kring inloggning.
+
+### :seedling: Login.js
+Innehåller ett formulär som användaren kan fylla i för att logga in på sidan. När användaren trycker _submit_ i formuläret triggas funktionen **Handle Login**. Den tar in de värden som användaren matat in, och skickar vidare dessa till **[login-metoden i klassen auth.js](./src/utils/auth.js)**. Om inloggningen är giltig så förs användaren till nästa sida, annars markeras fälten som inkorrekta.
 
 ---
 
@@ -182,7 +190,7 @@ De javascript som **direkt** hanterar DOM:en på en sida. Det kan röra sig om e
 
 Här hanteras logiska lösningar, vi finner bl.a upkoppling och hantering av [api](/src/utils/api.js) samt [testdata](/src/utils/testModels/products.json).
 
-### Test Models - DELETE LATER
+### :seedling: Test Models - DELETE LATER
 
 I denna mapp genereras vår testdata och detta ska tas bort i den färdigställlda produkten.
 
@@ -220,7 +228,52 @@ json-server products.json --port 5001
 
 Nu har du startat upp en lokal databas som kan simulera testdatat i products.json.
 
-### localstorage.js
+### :seedling: Auth
+Auth-Klassen hanterar autentiseringen i projektet. Inehåller metoderna:
++ **register(user)**, Registrera en användare.
++ **loginI(username, password)**, Logga in en registrerad användare.
++ **saveToken(token)**, Sparar undan _JSON Web Token_ i sessionstorage (nuvarande).
++ **getToken()**, Hämtar sparad token, för nuvarande ifrån sessionStorage.
+
+#### Register-Metoden
+Metoden Register tar in en **användare** som parameter. En användare **måste bestå av**:
++ firstname (string)
++ lastname (string)
++ email (string)
++ password (string)
++ isadmin (bool)
+
+**Förslagsvis** är att använda sig av _[klassen user.js](./src/classes/user.js)_.
+
+Metoden gör ett anrop till API:et som sparar undan användarens uppgifter i databas.
+
+#### Login-Metoden
+ Login-metoden tar in **två parametrar**:
+ + username (string) - Detta är användarens **email-address**.
+ + password (string) - Det lösenord som sparats undan när användaren registrerade sig.
+
+ Metoden skickar iväg ett anrop med ett objekt som består av parametrarna och får sedan tillbaka en **JSON Web Token**, som i anropet sparas undan i _Session Storage_ via metoden **saveToken(token)**.
+ 
+ >Denna token är **nödvändig** för de flesta androp i projektet och kan därför behöva hämtas vid vardera anrop som utförs.
+
+##### Anrop med Token - GET & POST
+För att göra ett anrop med JWT så krävs att den token som givits skickas med i **anropets header** som i exemplet nedan. Här pekar headern mot _authorization_ som tar emot en **_Bearer_ tillsammans** med **Token**.
+
+```js
+// GET-Method
+  const response = await axios.get(url, {headers: {authorization: `Bearer ${token}`}})
+
+//POST-Method
+  let product = {
+    name = "Apple",
+    price = 2.99,
+    description = "description"
+  }
+  const response = await axios.post(url, product, {headers: {authorization: `Bearer ${token}`}});
+
+```
+
+### :seedling: localstorage.js
 
 I denna fil lagras alla funktioner förknippade med Local-storage.
 
@@ -287,3 +340,17 @@ if (localStorage.getItem(storageName)) {
 > När vi sedan hämtar datan behöver vi då även konvertera tillbaka datan från JSON till objekten vi hämtat (JSON.parse).
 
 ---
+#### Registrera användare (register.js, register.html, auth.js)
+
+**Ny registreringssida & formulär:**
+Lagt till HTML-sida med ett registreringsformulär med fält för förnamn, efternamn, e‑post, lösenord och en isAdmin-checkbox för att se om den registrerade användaren är user eller admin.
+
+**Registreringslogik (register.js):**
+Skapat en script-fil som lyssnar på formulärets submit-händelse.
+Importerar User och Admin-klasser from user.js.
+Beroende på värdet från isAdmin-checkbox så skapas antingen user eller admin.
+Skickar datan till auth.register(user).
+Vid registrering omdirigeras användaren till login-sida.
+
+**Navigering från login-sidan (login.js):**
+Uppdaterat registrera-knappen så att den leder till register.html.

@@ -3,6 +3,7 @@ import { Product } from "../classes/product.js";
 import { Cart } from "../classes/cart.js";
 import { LocalStorage, CART_KEY } from "../utils/localstorage.js";
 import { Builder } from "../builders/builder.js";
+import { auth } from "../utils/auth.js";
 import { ProductFormBuilder } from "../builders/productFormBuilder.js";
 import { initProductHandlers } from "../builders/productHandlers.js";
 
@@ -24,6 +25,10 @@ async function loadProducts() {
   productsContainer.innerHTML = "<p>Loading products...</p>";
 
   try {
+    /* DELETE THIS */
+    let response = await auth.login("admin@example.com", "admin1234");
+    auth.saveToken(response.data.token);
+    /* ************* */
     const products = await fetchProducts();
     allProducts = products;
     productsContainer.innerHTML = "";
@@ -49,7 +54,7 @@ const renderProductCardEventListeners = (allProducts = []) => {
   let addProductBtns = document.querySelectorAll(".add-to-cart-btn");
   addProductBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      let product = allProducts.find((p) => p.id == btn.id.substring(btn.id.lastIndexOf("-") + 1));
+      let product = allProducts.find((p) => p._id == btn.id.substring(btn.id.lastIndexOf("-") + 1));
       addToCart(product);
     });
   });
@@ -58,14 +63,14 @@ const renderProductCardEventListeners = (allProducts = []) => {
     product.addEventListener("click", (event) => {
       if (event.target.tagName.toLowerCase() !== "button") {
         let builder = new Builder();
-        builder.buildProductCardInfo(allProducts.find((p) => p.id == product.id));
+        builder.buildProductCardInfo(allProducts.find((p) => p._id == product.id));
         let productInfo = builder.build();
         let modalContent = document.querySelector("#modalContent");
         modalContent.append(productInfo[0]);
         modal.showModal();
         let addToCartBtn = modalContent.querySelector(".add-to-cart-btn");
         addToCartBtn.addEventListener("click", () => {
-          addToCart(allProducts.find((p) => p.id == product.id));
+          addToCart(allProducts.find((p) => p._id == product.id));
         });
       }
     });

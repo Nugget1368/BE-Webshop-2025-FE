@@ -75,6 +75,10 @@ form {
   align-items: stretch;
   gap: 1rem;
 }
+form #error-message {
+  font-weight: 600;
+  color: #b00707;
+}
 
 .form-group {
   display: flex;
@@ -83,8 +87,15 @@ form {
   align-items: stretch;
 }
 .form-group input {
+  margin-top: 0.5rem;
   padding: 0.5rem;
   border: 1px solid #ddd;
+}
+.form-group .error {
+  box-shadow: 0 0 5px 2px #b00707;
+}
+.form-group .success {
+  box-shadow: 0 0 5px 2px #02a24d;
 }
 
 /* Footer */
