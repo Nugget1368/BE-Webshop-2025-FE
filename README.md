@@ -184,6 +184,35 @@ json-server products.json --port 5001
 
 Nu har du startat upp en lokal databas som kan simulera testdatat i products.json.
 
+### Auth
+Auth-Klassen hanterar autentiseringen i projektet. Inehåller metoderna:
++ **register(user)**, Registrera en användare.
++ **loginI(username, password)**, Logga in en registrerad användare.
++ **saveToken(token)**, Sparar undan _JSON Web Token_ i sessionstorage (nuvarande).
++ **getToken()**, Hämtar sparad token, för nuvarande ifrån sessionStorage.
+
+#### Register-Metoden
+Metoden Register tar in en **användare** som parameter. En användare **måste bestå av**:
++ firstname (string)
++ lastname (string)
++ email (string)
++ password (string)
++ isadmin (bool)
+
+**Förslagsvis** är att använda sig av _[klassen user.js](./src/classes/user.js)_.
+
+Metoden gör ett anrop till API:et som sparar undan användarens uppgifter i databas.
+
+#### Login-Metoden
+ Login-metoden tar in **två parametrar**:
+ + username (string) - Detta är användarens **email-address**.
+ + password (string) - Det lösenord som sparats undan när användaren registrerade sig.
+
+ Metoden skickar iväg ett anrop med ett objekt som består av parametrarna och får sedan tillbaka en **JSON Web Token**, som i anropet sparas undan i _Session Storage_ via metoden **saveToken(token)**.
+ 
+ >Denna token är **nödvändig** för de flesta androp i projektet och kan därför behöva hämtas vid vardera anrop som utförs.
+
+
 ### localstorage.js
 
 I denna fil lagras alla funktioner förknippade med Local-storage.
