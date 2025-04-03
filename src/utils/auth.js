@@ -23,10 +23,10 @@ export class auth {
                 password: password
             }
             let response = await axios.post("https://webshop-2025-be-g4.vercel.app/api/auth/login", user);
-            return response.data;
+            return response;
         }
         catch (err) {
-            return err.message;
+            return err;
         }
     }
 
