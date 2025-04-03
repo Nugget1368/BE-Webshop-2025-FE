@@ -16,6 +16,7 @@ export class ProductFormBuilder {
     const labelElement = document.createElement("label");
     labelElement.setAttribute("for", id);
     labelElement.textContent = label;
+    console.log("test");
 
     const input = document.createElement("input");
     input.type = "text";
