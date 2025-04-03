@@ -82,6 +82,18 @@ const openCart = (parentElement, userCart) => {
   builder.buildCartInfo(userCart);
   let child = builder.build();
   child.forEach((c) => parentElement.append(c));
+
+  const clearButton = parentElement.querySelector(".clear-cart-btn");
+  if (clearButton) {
+    clearButton.addEventListener("click", () => {
+      userCart.clearCart();
+      LocalStorage.clearStorage(CART_KEY);
+      parentElement.innerHTML =
+        "<p style='text-align: center; margin: 20px 10px;'>" +
+        "<span style='font-size: 1.5em; margin-right: 10px;'>🗑️</span>" +
+        "Din varukorg är nu tömd.</p>";
+    });
+  }
 };
 
 const addToCart = (product) => {
