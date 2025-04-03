@@ -25,6 +25,27 @@ Här finner vi alla klasser som används genom projektet:
 
 - **product.js**, innehåller modelen som används för en produkt.
 
+#### Tömma varukorgen
+
+För att ge användaren möjlighet att snabbt tömma hela varukorgen finns en "Töm varukorg"-funktion **clearCart()**
+
+**Funktionalitet**
+
+- En knapp med texten "Töm varukorg" visas i modalen för kundvagnsvyn när det finns produkter i varukorgen att visa.
+- När användaren klickar på knappen töms hela varukorgen på en gång.
+- Varukorgen rensas både från UI och från localStorage.
+- Ett bekräftelsemeddelande visas efter tömning.
+
+**I den aktuella implementationen:**
+
+- Knappen skapas i [Builder-klassen](/src/builders/builder.js). **buildCartInfo-metod** och får klassen "clear-cart-btn"
+- En event listener kopplas till knappen i `openCart`-funktionen i ([index](/src/scripts/index.js))
+- När knappen klickas anropas `clearCartUI`-funktionen som:
+  - Tömmer kundvagnsobjektet med `clearCart`-metoden
+  - Rensar localStorage med `LocalStorage.clearStorage(CART_KEY)` [LocaleStorage](/src/utils/localstorage.js).
+  - Uppdaterar UI med ett bekräftelsemeddelande
+  - Uppdaterar kundvagnsräknaren i header
+
 ## :star: Builders
 
 Här finner vi alla [Builder-klasser](https://refactoring.guru/design-patterns/builder). En Builder är ett design-pattern, en mall eller ett mönster som vi kan följa när vi vill rendera data i DOM:en.

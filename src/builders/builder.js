@@ -46,7 +46,7 @@ export class Builder {
     let button = document.createElement("button");
     button.textContent = text;
     classname === "" ? "" : button.classList.add(classname);
-    id === "" ? "" : button.id = id;
+    id === "" ? "" : (button.id = id);
     return button;
   }
 
@@ -63,6 +63,11 @@ export class Builder {
     total.textContent = `Total: $${cart.getTotal().toFixed(2)}`;
     let div = document.createElement("div");
     div.append(h4, ul, total);
+    if (cart.items.length > 0) {
+      let clearButton = this.buildBtn("Töm varukorg", "clear-cart-btn");
+      div.appendChild(clearButton);
+    }
+
     this.resultArr.push(div);
   }
 }
