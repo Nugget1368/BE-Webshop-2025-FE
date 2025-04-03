@@ -36,7 +36,6 @@ export async function addProduct(endpoint = "products", product) {
 export async function deleteProduct(endpoint = "products", productId) {
   const url = `${getBaseUrl()}${endpoint}/${productId}`;
   let token = auth.getToken();
-  console.log(productId);
   const response = await axios.delete(url, {headers: {authorization: `Bearer ${token}`}});
   if (response.status === 200) {
     return response.data;
