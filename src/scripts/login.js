@@ -31,7 +31,7 @@ async function handleLogin() {
   let response = await auth.login(username, password);
   auth.saveToken(response.token);
   //TODO Go to Admin-page or go to User page
-  window.location.href = "index.html";
+  // window.location.href = "index.html";
 }
 
 let registerBtn = document.querySelector("button#registerButton");
