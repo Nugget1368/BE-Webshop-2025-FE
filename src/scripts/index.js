@@ -4,6 +4,7 @@ import { Cart } from "../classes/cart.js";
 import { LocalStorage, CART_KEY } from "../utils/localstorage.js";
 import { ProductFormBuilder } from "../builders/ProductFormBuilder.js";
 import { Builder } from "../builders/builder.js";
+import { auth } from "../utils/auth.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 const modal = document.querySelector("#modal");
@@ -24,6 +25,10 @@ async function loadProducts() {
   productsContainer.innerHTML = "<p>Loading products...</p>";
 
   try {
+    /* DELETE THIS */
+    let response = await auth.login("admin@example.com", "admin1234");
+    auth.saveToken(response.data.token);
+    /* ************* */
     const products = await fetchProducts();
     allProducts = products;
     productsContainer.innerHTML = "";
