@@ -14,8 +14,6 @@ export function initProductHandlers() {
 }
 
 async function handleEditButtonClick(event) {
-  console.log("Edit knapp klickad!");
-
   const productCard = event.target.closest(".product-card");
   if (!productCard) {
     console.error("Kunde inte hitta produktkortet");
