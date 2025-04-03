@@ -25,15 +25,30 @@ function handleRegister() {
 }
 
 async function handleLogin() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+  const username = document.querySelector("#username");
+  const password = document.querySelector("#password");
+  let errorMessage = document.querySelector("#error-message");
+  errorMessage.textContent = "";
 
-  let response = await auth.login(username, password);
-  auth.saveToken(response.token);
-  //TODO Go to Admin-page or go to User page
-  // window.location.href = "index.html";
+  if(username.classList.contains("error")) 
+    username.classList.remove("error");
+  if(password.classList.contains("error")) 
+    password.classList.remove("error");
+
+  let usernameValue = username.value;
+  let passwordValue = password.value;
+
+  let response = await auth.login(usernameValue, passwordValue);
+  if (response.status !== 200) {
+    username.classList.add("error");
+    password.classList.add("error");
+    errorMessage.textContent = "Incorrect username or password";
+  }
+  else {
+    username.classList.add("success");
+    password.classList.add("success");
+    auth.saveToken(response.data.token);
+    //TODO Go to Admin-page or go to User page
+    // window.location.href = "index.html";
+  }
 }
-
-let registerBtn = document.querySelector("button#registerButton");
-console.log(registerBtn);
-registerBtn.addEventListener("click", handleRegister);
