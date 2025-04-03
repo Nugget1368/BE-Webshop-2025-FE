@@ -15,23 +15,19 @@ async function handleRegistration(event) {
   const lastname = document.querySelector("#lastName").value;
   const email = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
+  const isAdmin = document.querySelector("#isAdmin").checked;
 
   const user = {
     firstname,
     lastname,
     email,
     password,
-    isAdmin: false,
+    isAdmin: isAdmin,
   };
 
   let response = await auth.register(user);
   console.log("registreringssvar:", response);
   console.log(user);
 
-  console.log(err.response.data);
-
-  setTimeout(() => {
-    window.location.href = "login.html";
-  }, 2000);
-  
+  window.location.href = "login.html";
 }
