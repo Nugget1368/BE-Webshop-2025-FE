@@ -15,10 +15,8 @@ export function getBaseUrl() {
 export async function fetchProducts(endpoint = "products") {
   //! DONT USE THIS IN PRODUCTION
   const url = `${getBaseUrl()}${endpoint}`;
-  // const response = await axios.get(url);
   let token = auth.getToken();
-  /* KOLLA HÄR */
-  const response = await axios.get("https://webshop-2025-be-g4.vercel.app/api/products", {headers: {authorization: `Bearer ${token}`}})
+  const response = await axios.get(url, {headers: {authorization: `Bearer ${token}`}})
   if (response.status === 200) {
     return response.data;
   }
@@ -37,7 +35,9 @@ export async function addProduct(endpoint = "products", product) {
 
 export async function deleteProduct(endpoint = "products", productId) {
   const url = `${getBaseUrl()}${endpoint}/${productId}`;
-  const response = await axios.delete(url);
+  let token = auth.getToken();
+  console.log(productId);
+  const response = await axios.delete(url, {headers: {authorization: `Bearer ${token}`}});
   if (response.status === 200) {
     return response.data;
   }
