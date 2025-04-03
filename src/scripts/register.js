@@ -1,5 +1,5 @@
 import { auth } from "../utils/auth.js";
-// import { User } from "../classes/user.js";
+import { User, Admin } from "../classes/user.js"; // Importera klasserna
 
 document.addEventListener("DOMContentLoaded", initRegister);
 
@@ -17,13 +17,12 @@ async function handleRegistration(event) {
   const password = document.querySelector("#password").value;
   const isAdmin = document.querySelector("#isAdmin").checked;
 
-  const user = {
-    firstname,
-    lastname,
-    email,
-    password,
-    isAdmin: isAdmin,
-  };
+  let user;
+  if (isAdmin) {
+    user = new Admin(firstname, lastname, email, password);
+  } else {
+    user = new User(firstname, lastname, email, password);
+  }
 
   let response = await auth.register(user);
   console.log("registreringssvar:", response);

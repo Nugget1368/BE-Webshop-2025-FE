@@ -251,3 +251,17 @@ if (localStorage.getItem(storageName)) {
 > När vi sedan hämtar datan behöver vi då även konvertera tillbaka datan från JSON till objekten vi hämtat (JSON.parse).
 
 ---
+#### Registrera användare (register.js, register.html, auth.js)
+
+**Ny registreringssida & formulär:**
+Lagt till HTML-sida med ett registreringsformulär med fält för förnamn, efternamn, e‑post, lösenord och en isAdmin-checkbox för att se om den registrerade användaren är user eller admin.
+
+**Registreringslogik (register.js):**
+Skapat en script-fil som lyssnar på formulärets submit-händelse.
+Importerar User och Admin-klasser from user.js.
+Beroende på värdet från isAdmin-checkbox så skapas antingen user eller admin.
+Skickar datan till auth.register(user).
+Vid registrering omdirigeras användaren till login-sida.
+
+**Navigering från login-sidan (login.js):**
+Uppdaterat registrera-knappen så att den leder till register.html.
