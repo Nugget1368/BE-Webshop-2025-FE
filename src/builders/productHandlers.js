@@ -1,5 +1,5 @@
 import { deleteProduct, getProductById } from "../utils/api.js";
-import { ProductFormBuilder } from "./productFormBuilder.js";
+import { ProductFormBuilder } from "./ProductFormBuilder.js";
 
 export function initProductHandlers() {
   document.addEventListener("click", function (event) {
