@@ -4,7 +4,7 @@ import { Cart } from "../classes/cart.js";
 import { LocalStorage, CART_KEY } from "../utils/localstorage.js";
 import { Builder } from "../builders/builder.js";
 import { auth } from "../utils/auth.js";
-import { ProductFormBuilder } from "../builders/productFormBuilder.js";
+import { ProductFormBuilder } from "../builders/ProductFormBuilder.js";
 import { initProductHandlers } from "../builders/productHandlers.js";
 
 document.addEventListener("DOMContentLoaded", loadProducts);
