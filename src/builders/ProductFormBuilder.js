@@ -1,4 +1,4 @@
-import { addProduct, deleteProduct } from "../utils/api.js";
+import { addProduct, updateProduct } from "../utils/api.js";
 import { Product } from "../classes/product.js";
 
 export class ProductFormBuilder {
@@ -12,6 +12,7 @@ export class ProductFormBuilder {
       await this.handleSubmit();
     });
   }
+
   addTextField(id, label, required = true) {
     const labelElement = document.createElement("label");
     labelElement.setAttribute("for", id);
@@ -63,18 +64,53 @@ export class ProductFormBuilder {
     return this;
   }
 
+  populateWithProductData(product) {
+    console.log("Populating form with product data:", product);
+    this.form.querySelector("#name").value = product.name;
+    this.form.querySelector("#price").value = product.price;
+    this.form.querySelector("#description").value = product.description;
+    this.form.querySelector("#stock").value = product.stock;
+    this.form.querySelector("#imageUrl").value = product.imageUrl || "";
+
+    // Ändra knapptexten
+    this.form.querySelector("#createProductBtn").textContent = "Uppdatera produkt";
+
+    // Spara produkt-ID för uppdatering
+    this.form.dataset.productId = product.id || product._id || "";
+    console.log("Set product ID in form dataset:", this.form.dataset.productId);
+
+    return this;
+  }
+
   async handleSubmit() {
+    console.log("Form submitted, dataset:", this.form.dataset);
+
     let nameValue = document.querySelector("form#createProduct input#name").value;
     let priceValue = Number.parseFloat(document.querySelector("form#createProduct input#price").value);
     let descrValue = document.querySelector("form#createProduct input#description").value;
     let stockValue = Number.parseInt(document.querySelector("form#createProduct input#stock").value);
-    let imageValue = document.querySelector("form#createProduct input#imageUrl").value;
+    let imageValue = document.querySelector("form#createProduct input#imageUrl").value || "";
 
     let product = new Product(nameValue, priceValue, descrValue, stockValue, imageValue);
 
-    let response = await addProduct("products", product);
-    modal.close();
-    location.reload(); // Ladda om sidan för att visa ändringarna
+    const productId = this.form.dataset.productId;
+    console.log("Product ID from dataset:", productId);
+
+    try {
+      if (productId) {
+        product._id = productId;
+        console.log(product._id);
+        await updateProduct("products", productId, product);
+      } else {
+        await addProduct("products", product);
+      }
+
+      modal.close();
+      location.reload();
+    } catch (error) {
+      console.error("Error saving product:", error);
+      alert("Ett fel uppstod när produkten skulle sparas");
+    }
   }
 
   render() {
@@ -86,69 +122,23 @@ export class ProductFormBuilder {
   }
 }
 
-let addProductBtn = document.querySelector("#manageProductsBtn");
+export function initAddProductButton() {
+  let addProductBtn = document.querySelector("#manageProductsBtn");
 
-addProductBtn.addEventListener("click", () => {
-  modalContent.innerHTML = "";
-  // Skapa och konfigurera formulärbyggaren
-  const productForm = new ProductFormBuilder("#modalContent");
-
-  // Bygg formuläret med metoder från builder-klassen
-  productForm
-    .addTextField("name", "Name:")
-    .addNumberField("price", "Price:")
-    .addTextField("description", "Description:")
-    .addNumberField("stock", "Stock:")
-    .addTextField("imageUrl", "Image:")
-    .addButton("createProductBtn", "Lägg till produkt")
-    .render();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.addEventListener("click", function (event) {
-    if (event.target && event.target.classList.contains("delete-product-btn")) {
-      const productCard = event.target.closest(".product-card");
-      const productName = productCard.querySelector("h3").textContent;
-      const productId = productCard.id;
-
-      const modalContent = document.querySelector("#modalContent");
-      const modal = document.querySelector("#modal");
-
-      // Rensa tidigare innehåll
+  if (addProductBtn) {
+    addProductBtn.addEventListener("click", () => {
       modalContent.innerHTML = "";
 
-      // Skapa bekräftelseinnehåll
-      const confirmationDiv = document.createElement("div");
-      confirmationDiv.className = "delete-confirmation";
-      confirmationDiv.innerHTML = `
-          <h2>Radera produkt</h2>
-          <p>Är du säker att du vill radera produkten "${productName}"?</p>
-          <div class="confirmation-buttons">
-            <button id="cancelDeleteBtn">Nej, avbryt</button>
-            <button id="confirmDeleteBtn">Ja, radera</button>
-          </div>
-        `;
+      const productForm = new ProductFormBuilder("#modalContent");
 
-      modalContent.appendChild(confirmationDiv);
-
-      // Lägg till event listeners för knapparna
-      document.getElementById("cancelDeleteBtn").addEventListener("click", () => {
-        modal.close();
-      });
-
-      document.getElementById("confirmDeleteBtn").addEventListener("click", () => {
-        deleteProduct("products", productId)
-          .then(() => {
-            modal.close();
-            location.reload(); // Ladda om sidan för att visa ändringarna
-          })
-          .catch((error) => {
-            alert("Ett fel uppstod när produkten skulle tas bort");
-          });
-      });
-
-      // Visa modalen
-      modal.showModal();
-    }
-  });
-});
+      productForm
+        .addTextField("name", "Name:")
+        .addNumberField("price", "Price:")
+        .addTextField("description", "Description:")
+        .addNumberField("stock", "Stock:")
+        .addTextField("imageUrl", "Image:")
+        .addButton("createProductBtn", "Lägg till produkt")
+        .render();
+    });
+  }
+}

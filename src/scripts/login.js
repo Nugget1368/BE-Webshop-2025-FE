@@ -1,3 +1,5 @@
+import { auth } from "../utils/auth.js";
+import { User } from "../classes/user.js";
 document.addEventListener("DOMContentLoaded", initLogin);
 
 function initLogin() {
@@ -9,15 +11,36 @@ function initLogin() {
   });
 }
 
-function handleLogin() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+async function handleLogin() {
+  const username = document.querySelector("#username");
+  const password = document.querySelector("#password");
+  let errorMessage = document.querySelector("#error-message");
+  errorMessage.textContent = "";
 
-  // Basic demo login - NOT SECURE
-  if (username === "admin" && password === "admin") {
-    window.location.href = "admin.html";
-  } else {
-    alert("Invalid credentials: LOGGING IN ANYWAY");
-    window.location.href = "admin.html";
+  if(username.classList.contains("error")) 
+    username.classList.remove("error");
+  if(password.classList.contains("error")) 
+    password.classList.remove("error");
+
+  let usernameValue = username.value;
+  let passwordValue = password.value;
+
+  let response = await auth.login(usernameValue, passwordValue);
+  if (response.status !== 200) {
+    username.classList.add("error");
+    password.classList.add("error");
+    errorMessage.textContent = "Incorrect username or password";
+  }
+  else {
+    username.classList.add("success");
+    password.classList.add("success");
+    auth.saveToken(response.data.token);
+    //TODO Go to Admin-page or go to User page
+    window.location.href = "index.html";
   }
 }
+
+let registerBtn = document.querySelector("button#registerButton");
+registerBtn.addEventListener("click", () => {
+  window.location.href = "register.html";
+});
