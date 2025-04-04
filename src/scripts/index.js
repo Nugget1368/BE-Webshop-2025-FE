@@ -26,8 +26,8 @@ async function loadProducts() {
 
   try {
     /* DELETE THIS */
-    let response = await auth.login("admin@example.com", "admin1234");
-    auth.saveToken(response.data.token);
+    // let response = await auth.login("admin@example.com", "admin1234");
+    // auth.saveToken(response.data.token);
     /* ************* */
     const products = await fetchProducts();
     allProducts = products;
