@@ -1,7 +1,10 @@
 import { addProduct, updateProduct } from "../utils/api.js";
 import { Product } from "../classes/product.js";
 
+
+
 export class ProductFormBuilder {
+
   constructor(targetSelector) {
     this.targetElement = document.querySelector(targetSelector);
     this.form = document.createElement("form");
