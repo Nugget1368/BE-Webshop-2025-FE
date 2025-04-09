@@ -2,6 +2,10 @@
 
 Applikation som hanterar ett externt api och simulerar en online matvarubutik.
 
+### :book: Frontend-dokumentation
+
+För detaljerad information om frontend-implementationen, se [FRONTEND_DOCUMENTATION.md](./FRONTEND_DOCUMENTATION.md)
+
 ## :star: Classes
 
 Här finner vi alla klasser som används genom projektet:
@@ -199,10 +203,12 @@ result.foreach((element) => {
 ## :star: Scripts
 
 De javascript som **direkt** hanterar DOM:en på en sida. Det kan röra sig om exempelvis att **rendera objekt** eller **hantera eventlisteners**.
-+ **index.js**, Hanterar event på startsidan.
-+ **login.js**, Hanterar event kring inloggning.
+
+- **index.js**, Hanterar event på startsidan.
+- **login.js**, Hanterar event kring inloggning.
 
 ### :seedling: Login.js
+
 Innehåller ett formulär som användaren kan fylla i för att logga in på sidan. När användaren trycker _submit_ i formuläret triggas funktionen **Handle Login**. Den tar in de värden som användaren matat in, och skickar vidare dessa till **[login-metoden i klassen auth.js](./src/utils/auth.js)**. Om inloggningen är giltig så förs användaren till nästa sida, annars markeras fälten som inkorrekta.
 
 ---
@@ -250,34 +256,41 @@ json-server products.json --port 5001
 Nu har du startat upp en lokal databas som kan simulera testdatat i products.json.
 
 ### :seedling: Auth
+
 Auth-Klassen hanterar autentiseringen i projektet. Inehåller metoderna:
-+ **register(user)**, Registrera en användare.
-+ **loginI(username, password)**, Logga in en registrerad användare.
-+ **saveToken(token)**, Sparar undan _JSON Web Token_ i sessionstorage (nuvarande).
-+ **getToken()**, Hämtar sparad token, för nuvarande ifrån sessionStorage.
+
+- **register(user)**, Registrera en användare.
+- **loginI(username, password)**, Logga in en registrerad användare.
+- **saveToken(token)**, Sparar undan _JSON Web Token_ i sessionstorage (nuvarande).
+- **getToken()**, Hämtar sparad token, för nuvarande ifrån sessionStorage.
 
 #### Register-Metoden
+
 Metoden Register tar in en **användare** som parameter. En användare **måste bestå av**:
-+ firstname (string)
-+ lastname (string)
-+ email (string)
-+ password (string)
-+ isadmin (bool)
+
+- firstname (string)
+- lastname (string)
+- email (string)
+- password (string)
+- isadmin (bool)
 
 **Förslagsvis** är att använda sig av _[klassen user.js](./src/classes/user.js)_.
 
 Metoden gör ett anrop till API:et som sparar undan användarens uppgifter i databas.
 
 #### Login-Metoden
- Login-metoden tar in **två parametrar**:
- + username (string) - Detta är användarens **email-address**.
- + password (string) - Det lösenord som sparats undan när användaren registrerade sig.
 
- Metoden skickar iväg ett anrop med ett objekt som består av parametrarna och får sedan tillbaka en **JSON Web Token**, som i anropet sparas undan i _Session Storage_ via metoden **saveToken(token)**.
- 
- >Denna token är **nödvändig** för de flesta androp i projektet och kan därför behöva hämtas vid vardera anrop som utförs.
+Login-metoden tar in **två parametrar**:
+
+- username (string) - Detta är användarens **email-address**.
+- password (string) - Det lösenord som sparats undan när användaren registrerade sig.
+
+Metoden skickar iväg ett anrop med ett objekt som består av parametrarna och får sedan tillbaka en **JSON Web Token**, som i anropet sparas undan i _Session Storage_ via metoden **saveToken(token)**.
+
+> Denna token är **nödvändig** för de flesta androp i projektet och kan därför behöva hämtas vid vardera anrop som utförs.
 
 ##### Anrop med Token - GET & POST
+
 För att göra ett anrop med JWT så krävs att den token som givits skickas med i **anropets header** som i exemplet nedan. Här pekar headern mot _authorization_ som tar emot en **_Bearer_ tillsammans** med **Token**.
 
 ```js
@@ -361,6 +374,7 @@ if (localStorage.getItem(storageName)) {
 > När vi sedan hämtar datan behöver vi då även konvertera tillbaka datan från JSON till objekten vi hämtat (JSON.parse).
 
 ---
+
 #### Registrera användare (register.js, register.html, auth.js)
 
 **Ny registreringssida & formulär:**
