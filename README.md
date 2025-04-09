@@ -15,6 +15,7 @@ Här finner vi alla klasser som används genom projektet:
 - **productHandler.js**, detta är en produkthanteringsklass som låter dig ändra och ta bort ett redan skapat produktkort.
 - **cart.js**, innehåller modelen som används för en varukorg.
 - **user.js**, innehåller modelen som används för en user, samt en ärvande klass Admin.
+- **userBuilder.js**, en klass som använder Builder-designmönstret för att bygga UI-komponenter relaterade till användare, inklusive produktkort och varukorgsvisning utan redigerings- och raderingsfunktioner.
 
 ### :seedling: Cart.js
 
@@ -190,6 +191,11 @@ result.foreach((element) => {
   document.body.append(element);
 });
 ````
+
+### userBuilder-klassen
+
+I UserBuilder-klassen implementerar vi Builder-designmönstret för att skapa UI-komponenter relaterade till användare, inklusive produktkort och varukorgsvisning utan redigerings- och raderingsfunktioner.
+Likt andra Builder-klasser samlar UserBuilder komponenter i en resultat-array som returneras när byggprocessen är slutförd. Detta gör det möjligt att enkelt skapa, anpassa och hantera flera UI-element samtidigt för att sedan placera dem i DOM på ett strukturerat sätt.
 
 #### Metod-Anrop
 
