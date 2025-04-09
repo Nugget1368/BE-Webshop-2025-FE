@@ -38,10 +38,10 @@ async function handleLogin() {
     //TODO Go to Admin-page or go to User page
     console.log(response);
     if(response.data.user.isAdmin) {
-      window.location.href = "index.html";
+      window.location.href = "admin.html";
     }
     else {
-      window.location.href = "user.html";
+      window.location.href = "index.html";
     }
   }
 }
