@@ -55,7 +55,6 @@ export class UserBuilder {
     const groupedItems = {};
 
     cart.items.forEach((item) => {
-
       // Vi använder namn som nyckel för att gruppera produkter av samma typ i varukorgsmodalen då ID:s som genererars inte är unika.
       const name = item.name;
 
