@@ -49,14 +49,13 @@ export class UserBuilder {
   }
 
   buildCartInfo(cart) {
-    console.log("Items in cart:", cart.items);
     let h4 = document.createElement("h4");
     h4.textContent = "In Cart";
     let ul = document.createElement("ul");
     const groupedItems = {};
 
     cart.items.forEach((item) => {
-      // Använd namn som nyckel
+      // Vi använder namn som nyckel för att gruppera produkter av samma typ i varukorgsmodalen då ID:s som genererars inte är unika
       const name = item.name;
 
       if (!groupedItems[name]) {
