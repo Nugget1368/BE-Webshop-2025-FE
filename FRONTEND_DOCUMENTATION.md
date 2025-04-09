@@ -139,6 +139,9 @@ Skapar och hanterar formulär för produkter
 **Produkthanterare (productHandlers.js)**
 Kopplar interaktioner till produktkort
 
+**UserBuilder (userBuilder.js)**
+Implementerar Builder-designmönstret för att skapa UI-komponenter relaterade till användare. Klassen hanterar byggandet av produktkort och varukorgsvisningar utan redigerings- och raderingsfunktioner, vilket ger en tydlig separation mellan hur data visas för vanliga användare jämfört med administratörer.
+
 <hr>
 
 ## Användarflöden
@@ -188,5 +191,6 @@ Detta är områden i frontend-koden som skulle kunna förbättras om mer tid had
   </br>
 - **Kategorisering, filtrering och sök** - För närvarande visas alla produkter i en enkel lista utan möjlighet att kategorisera, filtrera eller söka. Att implementera produktkategorier och sökfunktionalitet skulle väsentligt förbättra användbarheten, särskilt när produktkatalogen växer.
   </br>
-- **Varukorg:** -
-  När en användare lägger till flera exemplar av samma produkt i sin varukorg bör dessa visas sammanlagt på en och samma rad, istället för att listas individuellt. Till exempel, om en användare lägger till 10 äpplen, ska det stå "Äpplen – 10 st" istället för att visa 10 separata rader med ett äpple per rad. Att gruppera identiska produkter förbättrar översikten i varukorgen.
+- **Varukorg:** - När en användare lägger till flera exemplar av samma produkt i sin varukorg bör dessa visas sammanlagt på en och samma rad, istället för att listas individuellt. Till exempel, om en användare lägger till 10 äpplen, ska det stå "Äpplen – 10 st" istället för att visa 10 separata rader med ett äpple per rad. Att gruppera identiska produkter förbättrar översikten i varukorgen.
+  </br>
+- **Inloggad administratör:** - När en administratör har loggat in bör texten på knappen "Logga in" i sidhuvudet ändras till "Logga ut". Detta förbättrar användarvänligheten genom att ge tydlig återkoppling på att användaren är inloggad. Vid utloggning ska administratören automatiskt omdirigeras till startsidan (index-sidan).
