@@ -36,7 +36,8 @@ async function handleLogin() {
     password.classList.add("success");
     auth.saveToken(response.data.token);
     //TODO Go to Admin-page or go to User page
-    window.location.href = "index.html";
+    console.log(response);
+    // window.location.href = "index.html";
   }
 }
 
