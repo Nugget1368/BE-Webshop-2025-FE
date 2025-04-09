@@ -58,11 +58,12 @@ Inga ytterligare kompileringssteg behövs för att köra projektet.
 
 Projektet använder följande teknologier:
 
-- **Axios** - Alla HTTP-anrop till backend-API:er [Dokumentation](https://axios-http.com/docs/intro)
+- **Axios** - Alla HTTP-anrop till backend-API:er [Dokumentation (JsDelivr)](https://axios-http.com/docs/intro)
 - **JSON-server** - För lokalt utvecklings API. [Dokumentation](https://www.npmjs.com/package/json-server)
 - **HTML5 & SCSS/CSS** - För struktur och styling
 - **Vanilla JavaScript** - För all funktionalitet
 - **LocalStorage API** - För att spara kundvagnsdata mellan sessioner
+- **Sessionstorage** - För att spara JWT efter inloggning
 - **JWT (JSON Web Tokens)** - För auktorisering och autentisering. Token sparas i sessionStorage efter inloggning som sedan skickas med varje API-anrop som kräver autentisering.
 <hr>
 
@@ -173,6 +174,10 @@ Detta är områden i frontend-koden som skulle kunna förbättras om mer tid had
 
 - **Responsiv design** - Nuvarande layout fungerar bra på desktop men har begränsad anpassning för mobila enheter. Ett mer flexibelt grid-system och förbättrade media queries skulle göra webbplatsen mer användarvänlig på mindre skärmar. Produktkorten behöver särskilt justeras för att fungera bättre på mobiler.
   </br>
+
+- **Grundläggande CMS** - Vi hade gärna ägnat mer tid åt design och styling för att skapa en bättre och mer genomtänkt överlämning. Vår ambition var att lägga en stabil grund som skulle kunna fungera för exempelvis ett enklare CMS i framtiden. Tyvärr fick vi lägga dessa planer åt sidan då vår PO uttryckligen inte ville att vi skulle lägga någon tid på designaspekten i detta skede av projektet utan prioritera funktionalitet framför design.
+  </br>
+
 - **Validering** - Formulären har grundläggande validering, men vi rekommenderar att lägga till mer robust validering innan data skickas till servern. Särskilt vid registrering och produktskapande skulle tydligare felmeddelanden om specifika formatkrav (lösenordsstyrka, bildformat, etc.) förbättra användarupplevelsen.
   </br>
 
