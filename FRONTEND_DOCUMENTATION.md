@@ -187,3 +187,6 @@ Detta är områden i frontend-koden som skulle kunna förbättras om mer tid had
 - **Användargränssnitt för admin/user** - Idag döljs och visas admin-funktioner baserat på användarroll, men en mer genomtänkt separation mellan användar- och adminvyer skulle förbättra användarupplevelsen OM beställare önskar?. En dedikerad admin-dashboard med tydligare navigation mellan olika administrativa funktioner skulle tex göra systemet mer intuitivt för administratörer.
   </br>
 - **Kategorisering, filtrering och sök** - För närvarande visas alla produkter i en enkel lista utan möjlighet att kategorisera, filtrera eller söka. Att implementera produktkategorier och sökfunktionalitet skulle väsentligt förbättra användbarheten, särskilt när produktkatalogen växer.
+  </br>
+- **Varukorg:** -
+  När en användare lägger till flera exemplar av samma produkt i sin varukorg bör dessa visas sammanlagt på en och samma rad, istället för att listas individuellt. Till exempel, om en användare lägger till 10 äpplen, ska det stå "Äpplen – 10 st" istället för att visa 10 separata rader med ett äpple per rad. Att gruppera identiska produkter förbättrar översikten i varukorgen.
