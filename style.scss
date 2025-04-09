@@ -149,7 +149,7 @@ dialog {
   border: none;
   border-radius: 8px;
   transition: transform 0.3s ease, opacity 0.3s ease;
-  button:first-child {
+  > button:first-child {
     position: absolute;
     top: 0.8rem;
     right: 1rem;
@@ -288,6 +288,59 @@ dialog[data-sidebar] {
 
 #products {
   margin-top: 1.5rem;
+}
+
+/* Styling för radera-produkt-modal */
+.delete-confirmation {
+  text-align: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.delete-confirmation h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.delete-confirmation p {
+  margin-bottom: 30px;
+  font-size: 1rem;
+}
+
+.confirmation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.confirmation-buttons button {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+#cancelDeleteBtn {
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+#cancelDeleteBtn:hover {
+  background-color: #e1e1e1;
+}
+
+#confirmDeleteBtn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+}
+
+#confirmDeleteBtn:hover {
+  background-color: #c0392b;
 }
 
 @media (max-width: 768px) {
