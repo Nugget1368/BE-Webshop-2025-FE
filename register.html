@@ -8,7 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
-
     <!-- MAIN CONTENT -->
     <main class="main-content">
       <h1>Registrera användare</h1>
@@ -17,22 +16,29 @@
           <div class="form-group">
             <label for="firstName">Förnamn</label>
             <input type="text" id="firstName" required />
+            <small class="form-text">Ange ditt förnamn</small>
           </div>
           <div class="form-group">
             <label for="lastName">Efternamn</label>
             <input type="text" id="lastName" required />
+            <small class="form-text">Ange ditt efternamn</small>
           </div>
           <div class="form-group">
             <label for="email">E-postadress</label>
-            <input type="email" id="email" required />
+            <input type="email" id="email" required placeholder="example@domain.com" />
+            <small class="form-text">Ange en giltig e-postadress som du har tillgång till</small>
           </div>
           <div class="form-group">
             <label for="password">Lösenord</label>
             <input type="password" id="password" required />
+            <small class="form-text">Minst 8 tecken med stor bokstav, liten bokstav, siffra och specialtecken</small>
           </div>
           <div class="form-group">
             <label for="isAdmin">Admin-användare</label>
-            <input type="checkbox" id="isAdmin"/>
+            <div class="checkbox-container">
+              <input type="checkbox" id="isAdmin" />
+              <small class="checkbox-text">Markera denna ruta om du vill registrera dig som administratör</small>
+            </div>
           </div>
           <button type="submit">Registrera användare</button>
         </form>

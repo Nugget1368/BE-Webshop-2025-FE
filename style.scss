@@ -12,7 +12,7 @@ body {
   min-height: 100vh;
 }
 
-a{
+a {
   cursor: pointer;
 }
 
@@ -76,7 +76,7 @@ a{
 form {
   @include flex(column);
   gap: 1rem;
-  #error-message{
+  #error-message {
     font-weight: 600;
     color: #b00707;
   }
@@ -85,17 +85,43 @@ form {
 .form-group {
   @include flex(column);
 
+  label {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
   input {
-    margin-top: .5rem;
+    margin-top: 0.5rem;
     padding: 0.5rem;
     border: 1px solid #ddd;
   }
-  .error{
+  .error {
     box-shadow: 0 0 5px 2px #b00707;
   }
 
-  .success{
+  .success {
     box-shadow: 0 0 5px 2px #02a24d;
+  }
+
+  .form-text {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 10px;
+  }
+
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .checkbox-text {
+    margin: 0;
+    font-size: 14px;
+    color: #6c757d;
   }
 }
 
@@ -116,8 +142,7 @@ form {
   }
 }
 
-
-dialog{
+dialog {
   padding: 2rem;
   background-color: white;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
@@ -138,11 +163,11 @@ dialog{
     font-weight: bold;
     transition: color 0.2s ease;
   }
-  
+
   #closeModal:hover {
     color: #333;
   }
-  
+
   #modalContent {
     padding-top: 0.5rem;
   }

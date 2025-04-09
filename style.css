@@ -86,6 +86,10 @@ form #error-message {
   justify-content: flex-start;
   align-items: stretch;
 }
+.form-group label {
+  font-weight: bold;
+  font-size: 16px;
+}
 .form-group input {
   margin-top: 0.5rem;
   padding: 0.5rem;
@@ -96,6 +100,24 @@ form #error-message {
 }
 .form-group .success {
   box-shadow: 0 0 5px 2px #02a24d;
+}
+.form-group .form-text {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 10px;
+}
+.form-group .checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+.form-group .checkbox-text {
+  margin: 0;
+  font-size: 14px;
+  color: #6c757d;
 }
 
 /* Footer */

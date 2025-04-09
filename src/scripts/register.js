@@ -26,10 +26,9 @@ async function handleRegistration(event) {
 
   let response = await auth.register(user);
   console.log(response);
-  if(response.status === 201) {
+  if (response.status === 201) {
     window.location.href = "login.html";
-  }
-  else{
-    alert("Something went wrong, could not register user");
+  } else {
+    alert(response.data.error);
   }
 }
