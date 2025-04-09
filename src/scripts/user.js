@@ -100,6 +100,7 @@ const addToCart = (product) => {
   cart.addItem(product);
   cart.updateCart();
   LocalStorage.saveToStorage(CART_KEY, product);
+  alert(`${product.name} har lagts till i varukorgen`);
 };
 
 const cartBtn = document.querySelector("[data-cart]");
@@ -117,7 +118,6 @@ cartBtn.addEventListener("click", () => {
     section.innerHTML = "";
   });
 });
-
 
 document.querySelector("#closeModal").addEventListener("click", () => {
   modal.close();
