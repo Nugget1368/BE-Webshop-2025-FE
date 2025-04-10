@@ -342,6 +342,40 @@ dialog[data-sidebar] {
   background-color: #c0392b;
 }
 
+#loginForm button[type=submit],
+#registerButton,
+#registerForm button[type=submit] {
+  padding: 0.7rem 1.2rem;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 200px;
+  margin-top: 0.8rem;
+  display: block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#loginForm button[type=submit] {
+  background-color: #4a90e2;
+}
+
+#loginForm button[type=submit]:hover {
+  background-color: #357abd;
+}
+
+#registerButton,
+#registerForm button[type=submit] {
+  background-color: #4caf50;
+}
+
+#registerButton:hover,
+#registerForm button[type=submit]:hover {
+  background-color: #43a047;
+}
+
 @media (max-width: 768px) {
   dialog#modal {
     width: 95%;

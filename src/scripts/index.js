@@ -7,8 +7,40 @@ import { auth } from "../utils/auth.js";
 import { ProductFormBuilder } from "../builders/ProductFormBuilder.js";
 import { initProductHandlers } from "../builders/productHandlers.js";
 
-document.addEventListener("DOMContentLoaded", loadProducts);
+document.addEventListener("DOMContentLoaded", () => {
+  loadProducts();
+  updateNavigation();
+  initAddProductButton();
+  initProductHandlers();
+});
+
 const modal = document.querySelector("#modal");
+
+function updateNavigation() {
+  const loginLink = document.querySelector('a[href="login.html"]');
+
+  if (loginLink) {
+    if (auth.isLoggedIn()) {
+      loginLink.textContent = "Logga ut";
+      loginLink.href = "#";
+
+      // Ta bort eventuell befintlig lyssnare
+      loginLink.removeEventListener("click", handleLogout);
+
+      // Lägg till lyssnare för utloggning
+      loginLink.addEventListener("click", handleLogout);
+    } else {
+      loginLink.textContent = "Login";
+      loginLink.href = "login.html";
+    }
+  }
+}
+
+function handleLogout(e) {
+  e.preventDefault();
+  auth.logout();
+  window.location.href = "index.html";
+}
 
 let cart = {};
 if (LocalStorage.getStorageAsJSON(CART_KEY)) {
@@ -138,10 +170,8 @@ function initAddProductButton() {
     addProductBtn.addEventListener("click", () => {
       modalContent.innerHTML = "";
 
-      // Skapa och konfigurera formulärbyggaren
       const productForm = new ProductFormBuilder("#modalContent");
 
-      // Bygg formuläret med metoder från builder-klassen
       productForm
         .addTextField("name", "Name:")
         .addNumberField("price", "Price:")
@@ -153,8 +183,3 @@ function initAddProductButton() {
     });
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  initAddProductButton();
-  initProductHandlers();
-});
