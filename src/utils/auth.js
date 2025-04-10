@@ -31,4 +31,13 @@ export class auth {
   static getToken() {
     return sessionStorage.getItem(TOKEN_KEY);
   }
+
+  static isLoggedIn() {
+    return !!sessionStorage.getItem(TOKEN_KEY);
+  }
+
+  static logout() {
+    sessionStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem("user");
+  }
 }
