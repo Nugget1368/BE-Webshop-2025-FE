@@ -19,8 +19,7 @@ export class Builder {
     let info = document.createElement("article");
     info.classList.add("product-card");
     info.id = product._id ? product._id : "missing-id";
-    let button = this.buildBtn("Buy", "add-to-cart-btn", info.id);
-    info.append(image, name, price, description, button);
+    info.append(image, name, price, description);
     this.resultArr.push(info);
   }
 
@@ -35,8 +34,7 @@ export class Builder {
     let btnContainer = document.createElement("div");
     let editBtn = this.buildBtn("Edit", "edit-product-btn", `edit-product-${element.id}`);
     let deleteBtn = this.buildBtn("Delete", "delete-product-btn", `delete-product-${element.id}`);
-    let addToCartBtn = this.buildBtn("Add To Cart", "add-to-cart-btn", `add-to-cart-${element.id}`);
-    btnContainer.append(editBtn, deleteBtn, addToCartBtn);
+    btnContainer.append(editBtn, deleteBtn);
     element.append(btnContainer);
 
     this.resultArr.push(element);
